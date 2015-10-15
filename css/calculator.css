@@ -1,0 +1,83 @@
+.container {
+  max-width: 628px; }
+
+#mortgage-calculator hr {
+  margin: 0;
+  border-color: #e6e6e6; }
+
+#mortgage-calculator strong {
+  color: #333; }
+
+span.amount {
+  font-size: 20px; }
+
+legend {
+  margin: 12px 0; }
+
+.row-mb {
+  margin-bottom: 12px; }
+
+table.table.table-amort {
+  font-size: 14px;
+  margin-bottom: 0; }
+  table.table.table-amort > tbody > tr > th, table.table.table-amort > tbody > tr > td {
+    text-align: center;
+    border-color: #ddd; }
+
+table.table.table-rate {
+  margin-bottom: 0; }
+  table.table.table-rate > tbody > tr > th, table.table.table-rate > tbody > tr > td {
+    text-align: center;
+    border-color: #ddd;
+    vertical-align: middle; }
+    table.table.table-rate > tbody > tr > th span, table.table.table-rate > tbody > tr > td span {
+      display: block;
+      font-size: 11px;
+      margin-top: -5px; }
+  table.table.table-rate > tbody > tr > th {
+    font-size: 13px; }
+  table.table.table-rate > tbody > tr > td {
+    font-size: 15px; }
+    table.table.table-rate > tbody > tr > td.product-name {
+      font-size: 12px; }
+
+.colour-box a {
+  color: #fff; }
+  .colour-box a:hover {
+    color: #fff; }
+  .colour-box a.btn-red {
+    background-color: #E11B3F;
+    border-color: #E11B3F; }
+    .colour-box a.btn-red:hover {
+      background-color: #c61837;
+      border-color: #c61837; }
+  .colour-box a.btn-purple {
+    background-color: #693492;
+    border-color: #693492; }
+    .colour-box a.btn-purple:hover {
+      background-color: #592c7b;
+      border-color: #592c7b; }
+  .colour-box a.btn-blue {
+    background-color: #20ACE4;
+    border-color: #20ACE4; }
+    .colour-box a.btn-blue:hover {
+      background-color: #1999cd;
+      border-color: #1999cd; }
+
+.fa {
+  margin-right: 8px; }
+
+.fine-print a {
+  margin-right: 10px;
+  color: #999; }
+  .fine-print a:hover, .fine-print a:active {
+    color: #666; }
+
+.action-icons a {
+  font-size: 16px;
+  color: #999; }
+  .action-icons a:hover, .action-icons a:active {
+    color: #666; }
+
+.action-icons .fa:nth-last-child {
+  margin-right: 0; }

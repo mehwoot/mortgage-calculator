@@ -1,0 +1,104 @@
+$red: #E11B3F;
+$purple: #693492;
+$blue: #20ACE4;
+
+.container { max-width: 628px; }
+
+#mortgage-calculator {
+  hr {
+    margin: 0;
+    border-color: #e6e6e6;
+  }
+  strong { color: #333; }
+}
+
+span.amount { font-size: 20px; }
+legend { margin: 12px 0; }
+.row-mb { margin-bottom: 12px; }
+
+table.table.table-amort {
+  font-size: 14px;
+  margin-bottom: 0;
+  > tbody {
+    > tr {
+      > th, > td {
+        text-align: center;
+        border-color: #ddd;
+      }
+    }
+  }
+}
+
+table.table.table-rate {
+  margin-bottom: 0;
+  > tbody {
+    > tr {
+      > th, > td {
+        text-align: center;
+        border-color: #ddd;
+        vertical-align: middle;
+        span {
+          display: block;
+          font-size: 11px;
+          margin-top: -5px;
+        }
+      }
+      > th { font-size: 13px; }
+      > td {
+        font-size: 15px;
+        &.product-name {
+          font-size: 12px;
+        }
+       }
+    }
+  }
+}
+
+.colour-box {
+  a {
+    color: #fff;
+    &:hover { color: #fff; }
+    &.btn-red {
+      background-color: $red;
+      border-color: $red;
+      &:hover {
+        background-color: darken($red, 6%);
+        border-color: darken($red, 6%);
+      }
+    }
+    &.btn-purple {
+      background-color: $purple;
+      border-color: $purple;
+      &:hover {
+        background-color: darken($purple, 6%);
+        border-color: darken($purple, 6%);
+      }
+    }
+    &.btn-blue {
+      background-color: $blue;
+      border-color: $blue;
+      &:hover {
+        background-color: darken($blue, 6%);
+        border-color: darken($blue, 6%);
+      }
+    }
+  }
+}
+
+.fa { margin-right: 8px; }
+.fine-print {
+  a {
+    margin-right: 10px;
+    color: #999;
+    &:hover, &:active { color: #666; }
+  }
+}
+
+.action-icons {
+  a {
+    font-size: 16px;
+    color: #999;
+    &:hover, &:active { color: #666; }
+  }
+  .fa:nth-last-child { margin-right: 0;}
+}
