@@ -41,7 +41,12 @@ $(document).ready(function(){
             align: 'left',
             floating: true,
             verticalAlign: 'bottom',
-            y: 10
+            layout: 'vertical',
+            y: 14,
+            itemStyle: {
+              fontWeight: 'normal',
+              fontSize: '11px'
+            }
           },
           plotOptions: {
               area: {
