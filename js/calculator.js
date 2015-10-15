@@ -15,13 +15,16 @@ $(document).ready(function(){
 
     $('html, body').animate({
       scrollTop: $('#your-results').offset().top
-    }, {easing: "swing", duration: 1600}
+    }, {easing: "swing", duration: 1000}
     );
 
     // Chart
     $('#chart').highcharts({
           chart: {
               type: 'area'
+          },
+          title: {
+              text: ''
           },
           xAxis: {
               categories: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026', '2027'],
@@ -33,6 +36,12 @@ $(document).ready(function(){
               title: {
                   text: 'Value ($)'
               }
+          },
+          legend: {
+            align: 'left',
+            floating: true,
+            verticalAlign: 'bottom',
+            y: 10
           },
           plotOptions: {
               area: {
