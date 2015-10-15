@@ -25,6 +25,10 @@ table.table.table-amort {
         text-align: center;
         border-color: #ddd;
       }
+      > th {
+        background: #ccc;
+        color: #666;
+      }
     }
   }
 }
@@ -43,16 +47,26 @@ table.table.table-rate {
           margin-top: -5px;
         }
       }
-      > th { font-size: 13px; }
+      > th {
+        font-size: 13px;
+        background: #ccc;
+        color: #666;
+       }
       > td {
         font-size: 15px;
+        small {
+          display: block;
+          margin-top: -4px;
+        }
         &.product-name {
           font-size: 12px;
         }
-       }
+      }
     }
   }
+  &.table-striped > tbody > tr:nth-of-type(even) { background-color: #f5f5f5; }
 }
+
 
 .colour-box {
   a {
@@ -101,4 +115,35 @@ table.table.table-rate {
     &:hover, &:active { color: #666; }
   }
   .fa:nth-last-child { margin-right: 0;}
+}
+
+@media (max-width: 768px) {
+  .table-rate {
+    > tbody > tr {
+      border-bottom: 1px solid #f1f1f1;
+      > td {
+        display: block;
+        float: left;
+        border: 0;
+        &.product-name {
+          padding: 11px;
+        }
+        small { display: block; }
+      }
+      .xs-show-3 { width: 25%; }
+      .xs-show-4 { width: 33%; }
+      .xs-show-9 { width: 75%; }
+      .xs-show-12 { width: 100%; }
+      .xs-left { clear: left; }
+    }
+    .btn { display: block; }
+  }
+
+  label {
+    margin-top: 5px;
+    margin-bottom: 0;
+  }
+
+  .fg-nm { margin-bottom: 0; }
+  table.table.table-amort > tbody > tr > th, table.table.table-amort > tbody > tr > td { font-size: 12px; }
 }

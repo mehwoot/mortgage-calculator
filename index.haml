@@ -1,6 +1,7 @@
 !!! 5
 %html
   %head
+    %title RateCity Mortgage Calculator Widget
     %meta{charset: "utf-8"}
     %meta{http-equiv: "X-UA-Compatible", content: "IE=edge"}
     %meta{name: "viewport", content: "width=device-width, initial-scale=1"}
@@ -17,11 +18,14 @@
           .well
             .row
               .col-sm-4
-                %a.btn.btn-default.btn-block{data-toggle: "tab", href: "#mortgage-calculator"} Mortgage Calculator
+                %a.btn.btn-sm.btn-default.btn-block{data-toggle: "tab", href: "#mortgage-calculator", style: "margin-bottom: 5px;"}
+                  Mortgage Calculator
               .col-sm-4
-                %a.btn.btn-default.btn-block{data-toggle: "tab", href: "#calculator-2"} Second Calculator
+                %a.btn.btn-sm.btn-default.btn-block{data-toggle: "tab", href: "#calculator-2", style: "margin-bottom: 5px;"}
+                  How much can I borrow?
               .col-sm-4
-                %a.btn.btn-default.btn-block{data-toggle: "tab", href: "#calculator-3"} Third Calculator
+                %a.btn.btn-sm.btn-default.btn-block{data-toggle: "tab", href: "#calculator-3", style: "margin-bottom: 5px;"}
+                  Stamp Duty Calculator
             .tab-content
               #mortgage-calculator.tab-pane.active
                 .row
@@ -29,13 +33,13 @@
                     %legend Mortgage Calculator
                 %form.form-horizontal
                   %fieldset
-                    .form-group
+                    .form-group.fg-nm
                       .col-sm-4
                         %label.control-label{for: "iAmAn"} I am an
                         %select#iAmAn.form-control
                           %option Owner/Occupier
                           %option Investor
-                    .form-group
+                    .form-group.fg-nm
                       .col-sm-4
                         %label.control-label{for: "borrowAmount"} Amount to borrow
                         .input-group
@@ -105,9 +109,10 @@
                           %span.fa.fa-calculator
                           Calculate
                       .col-sm-4.col-sm-offset-4.col-xs-6
-                        %a.btn.btn-default.form-control{role: "button", data-toggle: "collapse", data-target: "#advanced-options", aria-controls: "advanced-options"}
+                        %a.btn.btn-default.btn-block{role: "button", data-toggle: "collapse", data-target: "#advanced-options", aria-controls: "advanced-options"}
                           %span.fa.fa-gear
-                          Advanced options
+                          Advanced
+                          %span.hidden-xs &nbsp;Options
                     #your-results.collapse
                       .row.row-mb
                         .col-sm-12
@@ -129,99 +134,99 @@
                             %span.amount $000,000
                       .row
                         .col-sm-12
-                          #chart{style: "width: 558px; height: 350px;"}
-                          -# %img.img-responsive{src: "http://placehold.it/558x250?text=Graph+goes+here"}
+                          .chart-holder{style: "max-width:558px;"}
+                            #chart{style: "height: 350px;"}
                       .row.row-mb
                         .col-sm-12
                           %legend Home loans matching your criteria
-                          .table-responsive
-                            %table.table.table-condensed.table-striped.table-rate.table-bordered
-                              %tbody
-                                %tr
-                                  %th Company
-                                  %th Product
-                                  %th Advertised Rate
-                                  %th Comparison Rate
-                                  %th Monthly repayment
-                                  %th{data-toggle: "tooltip", title: "Lorem ipsum dolor sit amet.", data-placement: "left"} Go to Site
-                                %tr
-                                  %td
-                                    %img{src: "http://placehold.it/88x31"}
-                                  %td.product-name
-                                    %a{href: "#"} Home Loan Offer
-                                  %td
-                                    %strong 3.99%
-                                    %br
-                                    %span Variable
-                                  %td
-                                    %strong 3.99%
-                                  %td
-                                    %strong $0,000
-                                  %td
-                                    %a.btn.btn-primary.btn-sm Go to Site
-                                %tr
-                                  %td
-                                    %img{src: "http://placehold.it/88x31"}
-                                  %td.product-name
-                                    %a{href: "#"} Home Loan Offer
-                                  %td
-                                    %strong 3.99%
-                                    %br
-                                    %span Variable
-                                  %td
-                                    %strong 3.99%
-                                  %td
-                                    %strong $0,000
-                                  %td
-                                    %a.btn.btn-primary.btn-sm Go to Site
-                                %tr
-                                  %td
-                                    %img{src: "http://placehold.it/88x31"}
-                                  %td.product-name
-                                    %a{href: "#"} Home Loan Offer
-                                  %td
-                                    %strong 3.99%
-                                    %br
-                                    %span Variable
-                                  %td
-                                    %strong 3.99%
-                                  %td
-                                    %strong $0,000
-                                  %td
-                                    %a.btn.btn-primary.btn-sm Go to Site
-                                %tr
-                                  %td
-                                    %img{src: "http://placehold.it/88x31"}
-                                  %td.product-name
-                                    %a{href: "#"} Home Loan Offer
-                                  %td
-                                    %strong 3.99%
-                                    %br
-                                    %span Variable
-                                  %td
-                                    %strong 3.99%
-                                  %td
-                                    %strong $0,000
-                                  %td
-                                    %a.btn.btn-primary.btn-sm Go to Site
-                                %tr
-                                  %td
-                                    %img{src: "http://placehold.it/88x31"}
-                                  %td.product-name
-                                    %a{href: "#"} Home Loan Offer
-                                  %td
-                                    %strong 3.99%
-                                    %br
-                                    %span Variable
-                                  %td
-                                    %strong 3.99%
-                                  %td
-                                    %strong $0,000
-                                  %td
-                                    %a.btn.btn-primary.btn-sm Go to Site
+                          %table.table.table-condensed.table-striped.table-bordered.table-rate.credit-card-table
+                            %tbody
+                              %tr.hidden-xs
+                                %th Company
+                                %th Product
+                                %th Advertised Rate
+                                %th Comparison Rate
+                                %th Monthly repayment
+                                %th{data-toggle: "tooltip", title: "Lorem ipsum dolor sit amet.", data-placement: "left"} Go to Site
+                              %tr
+                                %td.xs-show-3
+                                  %img{src: "http://placehold.it/88x31"}
+                                %td.product-name.xs-show-9
+                                  %a{href: "#"} Home Loan Offer
+                                %td.xs-show-4
+                                  %strong 3.99%
+                                  %br
+                                  %span Variable
+                                %td.xs-show-4
+                                  %strong 3.99%
+                                %td.xs-show-4
+                                  %strong $0,000
+                                %td.xs-show-12
+                                  %a.btn.btn-primary.btn-sm Go to Site
+                              %tr
+                                %td.xs-show-3
+                                  %img{src: "http://placehold.it/88x31"}
+                                %td.product-name.xs-show-9
+                                  %a{href: "#"} Home Loan Offer
+                                %td.xs-show-4
+                                  %strong 3.99%
+                                  %br
+                                  %span Variable
+                                %td.xs-show-4
+                                  %strong 3.99%
+                                %td.xs-show-4
+                                  %strong $0,000
+                                %td.xs-show-12
+                                  %a.btn.btn-primary.btn-sm Go to Site
+                              %tr
+                                %td.xs-show-3
+                                  %img{src: "http://placehold.it/88x31"}
+                                %td.product-name.xs-show-9
+                                  %a{href: "#"} Home Loan Offer
+                                %td.xs-show-4
+                                  %strong 3.99%
+                                  %br
+                                  %span Variable
+                                %td.xs-show-4
+                                  %strong 3.99%
+                                %td.xs-show-4
+                                  %strong $0,000
+                                %td.xs-show-12
+                                  %a.btn.btn-primary.btn-sm Go to Site
+                              %tr
+                                %td.xs-show-3
+                                  %img{src: "http://placehold.it/88x31"}
+                                %td.product-name.xs-show-9
+                                  %a{href: "#"} Home Loan Offer
+                                %td.xs-show-4
+                                  %strong 3.99%
+                                  %br
+                                  %span Variable
+                                %td.xs-show-4
+                                  %strong 3.99%
+                                %td.xs-show-4
+                                  %strong $0,000
+                                %td.xs-show-12
+                                  %a.btn.btn-primary.btn-sm Go to Site
+                              %tr
+                                %td.xs-show-3
+                                  %img{src: "http://placehold.it/88x31"}
+                                %td.product-name.xs-show-9
+                                  %a{href: "#"} Home Loan Offer
+                                %td.xs-show-4
+                                  %strong 3.99%
+                                  %br
+                                  %span Variable
+                                %td.xs-show-4
+                                  %strong 3.99%
+                                %td.xs-show-4
+                                  %strong $0,000
+                                %td.xs-show-12
+                                  %a.btn.btn-primary.btn-sm Go to Site
+
                       .row
                         .col-sm-12
-                          %a.btn.btn-primary.btn-block{role: "button", data-toggle: "collapse", data-target: "#amort-table", aria-controls: "amortisation-table", style: "margin-bottom: 12px;"}
+                          %a.btn.btn-default.btn-block{role: "button", data-toggle: "collapse", data-target: "#amort-table", aria-controls: "amortisation-table", style: "margin-bottom: 12px;"}
                             %span.fa.fa-table
                             View amortisation table
                       #amort-table.collapse
@@ -236,9 +241,9 @@
                                   %th Owing
                                 %tr
                                   %td 0
-                                  %td $00,000
-                                  %td $000,000
-                                  %td $000,000
+                                  %td $100,000
+                                  %td $1,000,000
+                                  %td $1,000,000
                                 %tr
                                   %td 1
                                   %td $00,000
@@ -294,6 +299,8 @@
                 .row
                   .col-sm-12
                     %legend Second Calculator
+                    %p
+                      %strong Note: This calculator is a placeholder.
                 %form.form-horizontal
                   %fieldset
                     .form-group
@@ -369,12 +376,14 @@
                       .col-sm-4.col-xs-6
                         %a.btn.btn-primary.btn-block Calculate
                       .col-sm-4.col-sm-offset-4.col-xs-6
-                        %a.btn.btn-default.form-control Advanced options
+                        %a.btn.btn-default.form-control Advanced
 
               #calculator-3.tab-pane.fade
                 .row
                   .col-sm-12
                     %legend Third Calculator
+                    %p
+                      %strong Note: This calculator is a placeholder.
                 %form.form-horizontal
                   %fieldset
                     .form-group
@@ -450,7 +459,7 @@
                       .col-sm-4.col-xs-6
                         %a.btn.btn-primary.btn-block Calculate
                       .col-sm-4.col-sm-offset-4.col-xs-6
-                        %a.btn.btn-default.form-control Advanced options
+                        %a.btn.btn-default.form-control Advanced
             .row{style: "margin-top: 12px;"}
               .col-xs-6.fine-print
                 %small
