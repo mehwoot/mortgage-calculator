@@ -13,6 +13,50 @@ $(document).ready(function(){
   $('#results-button').click(function(e){
     e.preventDefault();
     $('#your-results').collapse('show');
+
+    // Chart
+    $('#chart').highcharts({
+          chart: {
+              type: 'area'
+          },
+          title: {
+              text: 'Amortisation Graph'
+          },
+          xAxis: {
+              categories: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026', '2027'],
+              title: {
+                text: 'Year'
+              }
+          },
+          yAxis: {
+              title: {
+                  text: 'Value ($)'
+              }
+          },
+          plotOptions: {
+              area: {
+                  stacking: 'normal',
+                  lineColor: '#3BA057',
+                  lineWidth: 1,
+                  marker: {
+                      enabled: false,
+                      lineWidth: 1,
+                      lineColor: '#3BA057'
+                  },
+                  pointPlacement: "on"
+              }
+          },
+          series: [{
+              name: 'Interest',
+              data: [200000, 180000, 155000, 120000, 100000, 85000, 70000, 60000, 50000, 48000, 42000, 20000, 0],
+              color: '#D0F1D9'
+          },
+          {
+              name: 'Principal',
+              data: [95000, 90000, 85000, 80000, 75000, 70000, 65000, 55000, 50000, 45000, 40000, 20000, 0],
+              color: '#3BA057'
+          }]
+      });
   });
 
   // Popovers and tooltip init
@@ -35,48 +79,4 @@ $(document).ready(function(){
     $('head style').last().remove();
     $('head').append('<style type="text/css">.btn-primary{background-color:#20ACE4;border-color:#20ACE4;}.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary:active:focus,.btn-primary:active:hover{background-color:#1999cd;border-color:#1999cd;a}a{color:#20ACE4;}a:hover{color:#1999cd;}</style>');
   });
-
-  // Chart
-  var chart = $('#chart').highcharts({
-        chart: {
-            type: 'area'
-        },
-        title: {
-            text: 'Amortisation Graph'
-        },
-        xAxis: {
-            categories: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026', '2027'],
-            title: {
-              text: 'Year'
-            }
-        },
-        yAxis: {
-            title: {
-                text: 'Value ($)'
-            }
-        },
-        plotOptions: {
-            area: {
-                stacking: 'normal',
-                lineColor: '#3BA057',
-                lineWidth: 1,
-                marker: {
-                    enabled: false,
-                    lineWidth: 1,
-                    lineColor: '#3BA057'
-                },
-                pointPlacement: "on"
-            }
-        },
-        series: [{
-            name: 'Interest',
-            data: [200000, 180000, 155000, 120000, 100000, 85000, 70000, 60000, 50000, 48000, 42000, 20000, 0],
-            color: '#D0F1D9'
-        },
-        {
-            name: 'Principal',
-            data: [95000, 90000, 85000, 80000, 75000, 70000, 65000, 55000, 50000, 45000, 40000, 20000, 0],
-            color: '#3BA057'
-        }]
-    });
 });
