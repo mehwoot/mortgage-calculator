@@ -23,6 +23,9 @@ table.table.table-amort {
   table.table.table-amort > tbody > tr > th, table.table.table-amort > tbody > tr > td {
     text-align: center;
     border-color: #ddd; }
+  table.table.table-amort > tbody > tr > th {
+    background: #ccc;
+    color: #666; }
 
 table.table.table-rate {
   margin-bottom: 0; }
@@ -35,11 +38,18 @@ table.table.table-rate {
       font-size: 11px;
       margin-top: -5px; }
   table.table.table-rate > tbody > tr > th {
-    font-size: 13px; }
+    font-size: 13px;
+    background: #ccc;
+    color: #666; }
   table.table.table-rate > tbody > tr > td {
     font-size: 15px; }
+    table.table.table-rate > tbody > tr > td small {
+      display: block;
+      margin-top: -4px; }
     table.table.table-rate > tbody > tr > td.product-name {
       font-size: 12px; }
+  table.table.table-rate.table-striped > tbody > tr:nth-of-type(even) {
+    background-color: #f5f5f5; }
 
 .colour-box a {
   color: #fff; }
@@ -81,3 +91,27 @@ table.table.table-rate {
 
 .action-icons .fa:nth-last-child {
   margin-right: 0; }
+
+@media (max-width: 768px) {
+  .table-rate > tbody > tr {
+    border-bottom: 1px solid #f1f1f1; }
+    .table-rate > tbody > tr > td {
+      display: block;
+      float: left;
+      border: 0; }
+      .table-rate > tbody > tr > td.product-name {
+        padding: 11px; }
+      .table-rate > tbody > tr > td small {
+        display: block; }
+    .table-rate > tbody > tr .xs-show-3 {
+      width: 25%; }
+    .table-rate > tbody > tr .xs-show-4 {
+      width: 33%; }
+    .table-rate > tbody > tr .xs-show-9 {
+      width: 75%; }
+    .table-rate > tbody > tr .xs-show-12 {
+      width: 100%; }
+    .table-rate > tbody > tr .xs-left {
+      clear: left; }
+  .table-rate .btn {
+    display: block; } }

@@ -37,7 +37,7 @@ $(document).ready(function(){
   });
 
   // Chart
-  $('#chart').highcharts({
+  var chart = $('#chart').highcharts({
         chart: {
             type: 'area'
         },
@@ -58,11 +58,12 @@ $(document).ready(function(){
         plotOptions: {
             area: {
                 stacking: 'normal',
-                lineColor: '#666666',
+                lineColor: '#3BA057',
                 lineWidth: 1,
                 marker: {
+                    enabled: false,
                     lineWidth: 1,
-                    lineColor: '#666666'
+                    lineColor: '#3BA057'
                 },
                 pointPlacement: "on"
             }
@@ -71,7 +72,8 @@ $(document).ready(function(){
             name: 'Interest',
             data: [200000, 180000, 155000, 120000, 100000, 85000, 70000, 60000, 50000, 48000, 42000, 20000, 0],
             color: '#D0F1D9'
-        }, {
+        },
+        {
             name: 'Principal',
             data: [95000, 90000, 85000, 80000, 75000, 70000, 65000, 55000, 50000, 45000, 40000, 20000, 0],
             color: '#3BA057'
