@@ -20,15 +20,15 @@
               .col-xs-4
                 %a.btn.btn-default.btn-block{data-toggle: "tab", href: "#mortgage-calculator", style: "margin-bottom: 5px;"}
                   Mortgage
-                  %span.hidden-xs Calculator
+                  %span.hidden-xs &nbsp;Calculator
               .col-xs-4
                 %a.btn.btn-default.btn-block{data-toggle: "tab", href: "#calculator-2", style: "margin-bottom: 5px;"}
                   Second
-                  %span.hidden-xs Calculator
+                  %span.hidden-xs &nbsp;Calculator
               .col-xs-4
                 %a.btn.btn-default.btn-block{data-toggle: "tab", href: "#calculator-3", style: "margin-bottom: 5px;"}
                   Third
-                  %span.hidden-xs Calculator
+                  %span.hidden-xs &nbsp;Calculator
             .tab-content
               #mortgage-calculator.tab-pane.active
                 .row
@@ -112,9 +112,10 @@
                           %span.fa.fa-calculator
                           Calculate
                       .col-sm-4.col-sm-offset-4.col-xs-6
-                        %a.btn.btn-default.form-control{role: "button", data-toggle: "collapse", data-target: "#advanced-options", aria-controls: "advanced-options"}
+                        %a.btn.btn-default.btn-block{role: "button", data-toggle: "collapse", data-target: "#advanced-options", aria-controls: "advanced-options"}
                           %span.fa.fa-gear
                           Advanced
+                          %span.hidden-xs &nbsp;Options
                     #your-results.collapse
                       .row.row-mb
                         .col-sm-12

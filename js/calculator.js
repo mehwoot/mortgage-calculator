@@ -10,8 +10,7 @@ $(document).ready(function(){
   });
 
   // Calculate
-  $('#results-button').click(function(e){
-    e.preventDefault();
+  $('#results-button').click(function(){
     $('#your-results').collapse('show');
 
     // Chart
@@ -63,19 +62,21 @@ $(document).ready(function(){
   $('[data-toggle="popover"]').popover();
   $('[data-toggle="tooltip"]').tooltip();
 
-  // Colours
-  $('.btn-red').click(function(e){
+  // Stop page jumping around when clicking links
+  $('a[href="#"]').click(function(e){
     e.preventDefault();
+  })
+
+  // Colours
+  $('.btn-red').click(function(){
     $('head style').last().remove();
     $('head').append('<style type="text/css">.btn-primary{background-color:#E11B3F;border-color:#E11B3F;}.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary:active:focus,.btn-primary:active:hover{background-color:#c61837;border-color:#c61837;a}a{color:#E11B3F;}a:hover{color:#c61837;}</style>');
   });
-  $('.btn-purple').click(function(e){
-    e.preventDefault();
+  $('.btn-purple').click(function(){
     $('head style').last().remove();
     $('head').append('<style type="text/css">.btn-primary{background-color:#693492;border-color:#693492;}.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary:active:focus,.btn-primary:active:hover{background-color:#592c7b;border-color:#592c7b;a}a{color:#693492;}a:hover{color:#592c7b;}</style>');
   });
-  $('.btn-blue').click(function(e){
-    e.preventDefault();
+  $('.btn-blue').click(function(){
     $('head style').last().remove();
     $('head').append('<style type="text/css">.btn-primary{background-color:#20ACE4;border-color:#20ACE4;}.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary:active:focus,.btn-primary:active:hover{background-color:#1999cd;border-color:#1999cd;a}a{color:#20ACE4;}a:hover{color:#1999cd;}</style>');
   });
