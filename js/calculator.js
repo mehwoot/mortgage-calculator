@@ -13,13 +13,15 @@ $(document).ready(function(){
   $('#results-button').click(function(){
     $('#your-results').collapse('show');
 
+    $('html, body').animate({
+      scrollTop: $('#your-results').offset().top
+    }, {easing: "swing", duration: 1600}
+    );
+
     // Chart
     $('#chart').highcharts({
           chart: {
               type: 'area'
-          },
-          title: {
-              text: 'Amortisation Graph'
           },
           xAxis: {
               categories: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026', '2027'],

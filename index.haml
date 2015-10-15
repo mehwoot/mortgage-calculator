@@ -17,18 +17,15 @@
         .col-sm-12
           .well
             .row
-              .col-xs-4
-                %a.btn.btn-default.btn-block{data-toggle: "tab", href: "#mortgage-calculator", style: "margin-bottom: 5px;"}
-                  Mortgage
-                  %span.hidden-xs &nbsp;Calculator
-              .col-xs-4
-                %a.btn.btn-default.btn-block{data-toggle: "tab", href: "#calculator-2", style: "margin-bottom: 5px;"}
-                  Second
-                  %span.hidden-xs &nbsp;Calculator
-              .col-xs-4
-                %a.btn.btn-default.btn-block{data-toggle: "tab", href: "#calculator-3", style: "margin-bottom: 5px;"}
-                  Third
-                  %span.hidden-xs &nbsp;Calculator
+              .col-sm-4
+                %a.btn.btn-sm.btn-default.btn-block{data-toggle: "tab", href: "#mortgage-calculator", style: "margin-bottom: 5px;"}
+                  Mortgage Calculator
+              .col-sm-4
+                %a.btn.btn-sm.btn-default.btn-block{data-toggle: "tab", href: "#calculator-2", style: "margin-bottom: 5px;"}
+                  How much can I borrow?
+              .col-sm-4
+                %a.btn.btn-sm.btn-default.btn-block{data-toggle: "tab", href: "#calculator-3", style: "margin-bottom: 5px;"}
+                  Stamp Duty Calculator
             .tab-content
               #mortgage-calculator.tab-pane.active
                 .row
@@ -36,13 +33,13 @@
                     %legend Mortgage Calculator
                 %form.form-horizontal
                   %fieldset
-                    .form-group
+                    .form-group.fg-nm
                       .col-sm-4
                         %label.control-label{for: "iAmAn"} I am an
                         %select#iAmAn.form-control
                           %option Owner/Occupier
                           %option Investor
-                    .form-group
+                    .form-group.fg-nm
                       .col-sm-4
                         %label.control-label{for: "borrowAmount"} Amount to borrow
                         .input-group

@@ -114,4 +114,9 @@ table.table.table-rate {
     .table-rate > tbody > tr .xs-left {
       clear: left; }
   .table-rate .btn {
-    display: block; } }
+    display: block; }
+  label {
+    margin-top: 5px;
+    margin-bottom: 0; }
+  .fg-nm {
+    margin-bottom: 0; } }
