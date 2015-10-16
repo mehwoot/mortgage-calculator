@@ -12,6 +12,7 @@ $blue: #20ACE4;
   strong { color: #333; }
 }
 
+
 span.amount { font-size: 20px; }
 legend { margin: 12px 0; }
 .row-mb { margin-bottom: 12px; }
@@ -119,7 +120,7 @@ table.table.table-rate {
   .fa:nth-last-child { margin-right: 0;}
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .table-rate {
     > tbody > tr {
       border-bottom: 1px solid #f1f1f1;

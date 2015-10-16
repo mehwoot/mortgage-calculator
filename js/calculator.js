@@ -13,11 +13,6 @@ $(document).ready(function(){
   $('#results-button').click(function(){
     $('#your-results').collapse('show');
 
-    $('html, body').animate({
-      scrollTop: $('#your-results').offset().top
-    }, {easing: "swing", duration: 1000}
-    );
-
     // Chart
     $('#chart').highcharts({
           chart: {
