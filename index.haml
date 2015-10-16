@@ -13,7 +13,7 @@
     %script{src: "js/iframeResizer.contentWindow.min.js"}
 
   %body
-    .container{style: "margin-top: 15px;"}
+    .container
       .row
         .col-sm-12
           .well
@@ -82,7 +82,7 @@
                             %span.input-group-addon $
                             %input#extraPayments.form-control{type: "number", placeholder: 100, step: "10"}
                         .col-sm-4
-                          %label.control-label{for: "initialPayments"} Initial mn Repayments
+                          %label.control-label{for: "initialPayments"} Initial Monthly Payments
                           .input-group
                             %span.input-group-addon $
                             %input#initialPayments.form-control{type: "number", placeholder: 1000, step: "100"}

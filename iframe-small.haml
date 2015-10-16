@@ -13,13 +13,14 @@
   %body
     .container{style: "margin-top: 15px;"}
       .row
-        .col-sm-12
-          %iframe{src: "http://open.ratecity.com.au/mortgage-calculator"}
+        .col-sm-7
+          %iframe{src: "http://open.ratecity.com.au/mortgage-calculator/"}
           %script{src: "http://open.ratecity.com.au/mortgage-calculator/js/iframeResizer.min.js"}
           <style>iframe{width:100%;border:0;}</style>
           <script>iFrameResize()</script>
+        .col-sm-5{style: "height:500px;background:#f8f8f8;"}
 
       .row
-        .col-sm-12.text-center
+        .col-sm-7.text-center
           %small
             %p Powered by <a href="http://www.ratecity.com.au/home-loans/mortgage-calculator" style="color: #1aac41;">RateCity</a>
