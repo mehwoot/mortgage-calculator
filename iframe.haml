@@ -8,17 +8,16 @@
     -#%link{rel: "stylesheet", href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"}
     %link{rel: "stylesheet", href: "css/application.css"}
     %script{src: "https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"}
-    %script{src: "js/iframeResizer.min.js"}
-    <style>iframe{width:100%;border:0;}</style>
+
 
   %body
     .container{style: "margin-top: 15px;"}
       .row
         .col-sm-12
           %iframe{src: "http://open.ratecity.com.au/mortgage-calculator"}
-          <script>iFrameResize({
-            log:true
-            })</script>
+          %script{src: "js/iframeResizer.min.js"}
+          <style>iframe{width:100%;border:0;}</style>
+          <script>iFrameResize({})</script>
 
       .row
         .col-sm-12.text-center
