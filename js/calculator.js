@@ -1,17 +1,111 @@
 $(document).ready(function(){
 
-  // Introductory loan fields
-  $("#loanType").change(function() {
-    if ($(this).val() == "Introductory") {
-      $("#intro-loan").collapse('show');
-    } else {
-      $("#intro-loan").collapse('hide');
-    }
+  var borrowChart, borrowAmountTotal;
+
+  Highcharts.setOptions({ lang: {thousandsSep: ',' } });
+
+  function currency(number) {
+    var number = number.toString(),
+    dollars = number.split('.')[0],
+    cents = (number.split('.')[1] || '') +'00';
+    dollars = dollars.split('').reverse().join('')
+        .replace(/(\d{3}(?!$))/g, '$1,')
+        .split('').reverse().join('');
+    return dollars;
+  }
+
+  // Set values for testing
+  $('#propertyValue').val('50000');
+  $('#initialSum').val('0');
+  $('#loanPeriod').val('10');
+
+  // Pie chart
+
+  // Fixed variables
+  stampDuty = 30000;
+  random = 20000;
+  lawyer = 2000;
+
+  drawBorrowChart = function() {
+    $('#borrow-chart').highcharts({
+        colors: ['#1AAC41', '#FC903D', '#FED030', '#999', '#60C0DC'],
+        chart: {
+            backgroundColor: '#f1f1f1',
+            plotBackgroundColor: '#f1f1f1',
+            plotBorderWidth: 0,
+            plotShadow: false
+        },
+        title: {
+            align: 'center',
+            verticalAlign: 'middle',
+            y: 0,
+            style: {
+              color: '#999',
+              fontSize: '15px'
+            }
+        },
+        legend: {
+          floating: true,
+          layout: "vertical",
+          align: "left",
+          useHTML: true,
+          labelFormatter: function() {
+              return this.name + ': <span style="font-weight:normal">$' + currency(this.y) + '</span>';
+				}
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>${point.y:,.0f}</b>'
+        },
+        plotOptions: {
+            pie: {
+              size: '100%',
+              showInLegend: true,
+                dataLabels: {
+                    enabled: false
+
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Cost',
+            innerSize: '65%',
+            data: [
+                ['Property',   Number($('#propertyValue').val())],
+                ['Stamp Duty',       stampDuty],
+                ['Random', random],
+                ['Lawyer',    lawyer]
+            ]
+        }]
+    });
+    borrowChart = $('#borrow-chart').highcharts();
+    borrowChart.setTitle({
+      text:
+        '<strong>$' + currency(borrowAmountTotal) + '</strong>' + "<br /> borrowing"
+    });
+  }
+
+  $('#initialSum').focusout(function(){
+    $('.borrow-extra-col').collapse('show');
+  });
+
+  borrowAmountTotal = $('#propertyValue').val() - $('#initialSum').val() + stampDuty + random + lawyer;
+
+  $('.chart-data input').keyup(function(){
+    $('#borrow-total').html(function(){
+      return currency(borrowAmountTotal);
+    });
+    drawBorrowChart();
   });
 
   // Calculate
   $('#results-button').click(function(){
     $('#your-results').collapse('show');
+
+    // Repayment amount
+    $('.repayment-amount').text(function(){
+      return currency(Math.round(borrowAmountTotal / $('#loanPeriod').val()));
+    });
 
     // Chart
     $('#chart').highcharts({
@@ -78,17 +172,10 @@ $(document).ready(function(){
     e.preventDefault();
   })
 
-  // Colours
-  $('.btn-red').click(function(){
-    $('head style').last().remove();
-    $('head').append('<style type="text/css">.btn-primary{background-color:#E11B3F;border-color:#E11B3F;}.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary:active:focus,.btn-primary:active:hover{background-color:#c61837;border-color:#c61837;a}a{color:#E11B3F;}a:hover{color:#c61837;}</style>');
-  });
-  $('.btn-purple').click(function(){
-    $('head style').last().remove();
-    $('head').append('<style type="text/css">.btn-primary{background-color:#693492;border-color:#693492;}.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary:active:focus,.btn-primary:active:hover{background-color:#592c7b;border-color:#592c7b;a}a{color:#693492;}a:hover{color:#592c7b;}</style>');
-  });
-  $('.btn-blue').click(function(){
-    $('head style').last().remove();
-    $('head').append('<style type="text/css">.btn-primary{background-color:#20ACE4;border-color:#20ACE4;}.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary:active:focus,.btn-primary:active:hover{background-color:#1999cd;border-color:#1999cd;a}a{color:#20ACE4;}a:hover{color:#1999cd;}</style>');
-  });
+  // Set values for testing
+  $('#propertyValue').val('50000');
+  $('#initialSum').val('0');
+  $('#loanPeriod').val('10');
+
+  drawBorrowChart();
 });

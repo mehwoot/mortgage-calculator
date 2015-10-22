@@ -13,290 +13,284 @@
 
   %body
     .container
-      .row
-        .col-sm-12
-          .row
-            .col-sm-12
-              %legend Mortgage Calculator
-          %form.form-horizontal
-            %fieldset
-              .form-group.fg-nm
-                .col-sm-4
-                  %label.control-label{for: "iAmAn"} I am an
-                  %select#iAmAn.form-control
-                    %option Owner/Occupier
-                    %option Investor
-              .form-group.fg-nm
-                .col-sm-4
-                  %label.control-label{for: "borrowAmount"} Amount to borrow
-                  .input-group
-                    %span.input-group-addon $
-                    %input#borrowAmount.form-control{type: "number", placeholder: 200000, step: "10000"}
-                .col-sm-4
-                  %label.control-label{for: "homePrice"} Property Value
-                  .input-group
-                    %span.input-group-addon $
-                    %input#homePrice.form-control{type: "number", placeholder: 500000, step: "10000"}
-                .col-sm-4
-                  %label.control-label{for: "timeToRepay"} Loan Period
-                  .input-group
-                    %input#timeToRepay.form-control{type: "number", placeholder: 10, step: "1"}
-                    %span.input-group-addon years
-              .form-group
-                .col-sm-4
-                  %label.control-label{for: "interestRate"} Interest Rate
-                  .input-group
-                    %input#interestRate.form-control{type: "number", placeholder: 4.5, step: "0.1"}
-                    %span.input-group-addon %
-                .col-sm-4
-                  %label.control-label{for: "paymentFrequency"} Payment Frequency
-                  %select#paymentFrequency.form-control
-                    %option Weekly
-                    %option Fortnightly
-                    %option Monthly
-                .col-sm-4
-                  %label.control-label{for: "repaymentType"} Repayment Type
-                  %select#repaymentType.form-control
-                    %option Principal & interest
-                    %option Interest only
-              #advanced-options.collapse
-                %hr
-                .form-group
-                  .col-sm-4
-                    %label.control-label{for: "extraPayments"} Extra Payments
-                    .input-group
+      .calculator-container
+        .row
+          .col-sm-12
+            .row
+              .col-sm-12
+                %legend Mortgage Calculator
+            %form.form-horizontal
+              %fieldset
+                .form-group.fg-nm
+                  .col-xs-6
+                    %label.control-label{for: "propertyValue"} Property Value
+                    .input-group.chart-data
                       %span.input-group-addon $
-                      %input#extraPayments.form-control{type: "number", placeholder: 100, step: "10"}
-                  .col-sm-4
-                    %label.control-label{for: "initialPayments"} Initial Monthly Payments
-                    .input-group
+                      %input#propertyValue.form-control{type: "number", placeholder: 500000, step: "10000", pattern: "^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$"}
+                  .col-xs-6
+                    %label.control-label{for: "initialSum"} I have an initial sum of
+                    .input-group.chart-data
                       %span.input-group-addon $
-                      %input#initialPayments.form-control{type: "number", placeholder: 1000, step: "100"}
+                      %input#initialSum.form-control{type: "number", placeholder: 50000, step: "10000"}
+                  .col-xs-12.borrow-extra-col.collapse
+                    %a.borrow-extra-trigger{role: "button", data-toggle: "collapse", data-target: ".borrow-extra", aria-controls: "advanced-options"}
+                      .alert.alert-info
+                        %span.fa.fa-info-circle
+                        %span You will need to borrow $<span id="borrow-total"></span>. Why?
+                        %span.fa.fa-angle-down.pull-right
+                  .col-xs-12.borrow-extra.collapse
+                    %div
+                      #borrow-chart{style: "height: 200px;"}
+                  .col-xs-6
+                    %label.control-label{for: "loanPeriod"} Loan Period
+                    .input-group
+                      %input#loanPeriod.form-control{type: "number", placeholder: 30, step: "1"}
+                      %span.input-group-addon years
+                  .col-xs-6
+                    %label.control-label{for: "interestRate"} Interest Rate
+                    .input-group
+                      %input#interestRate.form-control{type: "number", placeholder: 4.5, step: "0.1"}
+                      %span.input-group-addon %
+                #advanced-options.addcollapse
+                  .row
+                    .col-xs-12
+                      %p.repayment1
+                  -#
+                    .form-group
+                      .col-sm-4
+                        %label.control-label{for: "extraPayments"} Extra Payments
+                        .input-group
+                          %span.input-group-addon $
+                          %input#extraPayments.form-control{type: "number", placeholder: 100, step: "10"}
+                      .col-sm-4
+                        %label.control-label{for: "initialPayments"} Initial Monthly Payments
+                        .input-group
+                          %span.input-group-addon $
+                          %input#initialPayments.form-control{type: "number", placeholder: 1000, step: "100"}
+                      .col-sm-4
+                        %label.control-label{for: "loanType"} Loan Type
+                        %select#loanType.form-control
+                          %option Variable
+                          %option Fixed
+                          %option Introductory
+                    #intro-loan.addcollapse
+                      .form-group
+                        .col-sm-4.col-sm-offset-4
+                          %label.control-label{for: "introRate"} Intro Rate
+                          .input-group
+                            %input#introRate.form-control{type: "number", placeholder: 3.5, step: "0.1"}
+                            %span.input-group-addon %
+                        .col-sm-4
+                          %label.control-label{for: "introTerm"} Intro Term
+                          .input-group
+                            %input#introTerm.form-control{type: "number", placeholder: 24, step: "1"}
+                            %span.input-group-addon months
+                .row
                   .col-sm-4
-                    %label.control-label{for: "loanType"} Loan Type
-                    %select#loanType.form-control
-                      %option Variable
-                      %option Fixed
-                      %option Introductory
-                #intro-loan.collapse
-                  .form-group
-                    .col-sm-4.col-sm-offset-4
-                      %label.control-label{for: "introRate"} Intro Rate
-                      .input-group
-                        %input#introRate.form-control{type: "number", placeholder: 3.5, step: "0.1"}
-                        %span.input-group-addon %
+                    %a{role: "button", data-toggle: "collapse", data-target: "#advanced-options", aria-controls: "advanced-options"}
+                      Advanced Options&nbsp;
+                      %span.fa.fa-caret-down
+                .row
+                  .col-xs-4.col-xs-offset-4
+                    %a#results-button.btn.btn-primary.btn-lg.btn-block{role: "button", aria-controls: "your-results"}
+                      Calculate Now
+                #your-results.addcollapse
+                  .row.row-mb
+                    .col-sm-12
+                      %legend Your results
                     .col-sm-4
-                      %label.control-label{for: "introTerm"} Intro Term
-                      .input-group
-                        %input#introTerm.form-control{type: "number", placeholder: 24, step: "1"}
-                        %span.input-group-addon months
-              .row
-                .col-sm-4.col-xs-6
-                  %a#results-button.btn.btn-primary.btn-block{role: "button", aria-controls: "your-results"}
-                    %span.fa.fa-calculator
-                    Calculate
-                .col-sm-4.col-sm-offset-4.col-xs-6
-                  %a.btn.btn-default.btn-block{role: "button", data-toggle: "collapse", data-target: "#advanced-options", aria-controls: "advanced-options"}
-                    %span.fa.fa-gear
-                    Advanced
-                    %span.hidden-xs &nbsp;Options
-              #your-results.collapse
-                .row.row-mb
-                  .col-sm-12
-                    %legend Your results
-                  .col-sm-4
-                    %strong
-                      Repayment amount:
-                      %br
-                      %span.amount $0,000
-                  .col-sm-4
-                    %strong
-                      Total amount payable:
-                      %br
-                      %span.amount $000,000
-                  .col-sm-4
-                    %strong
-                      Total interest payable:
-                      %br
-                      %span.amount $000,000
-                .row
-                  .col-sm-12
-                    .chart-holder{style: "max-width:558px;"}
-                      #chart{style: "height: 350px;"}
-                .row.row-mb
-                  .col-sm-12
-                    %legend Home loans matching your criteria
-                    %table.table.table-condensed.table-striped.table-bordered.table-rate
-                      %tbody
-                        %tr.hidden-xs
-                          %th Company
-                          %th Product
-                          %th Advertised Rate
-                          %th Comparison Rate
-                          %th Monthly repayment
-                          %th{data-toggle: "tooltip", title: "Lorem ipsum dolor sit amet.", data-placement: "left"} Go to Site
-                        %tr
-                          %td.xs-show-3
-                            %img{src: "http://placehold.it/88x31"}
-                          %td.product-name.xs-show-9
-                            %a{href: "#"} Home Loan Offer
-                          %td.xs-show-4
-                            %strong 3.99%
-                            %br
-                            %span Variable
-                          %td.xs-show-4
-                            %strong 3.99%
-                          %td.xs-show-4
-                            %strong $0,000
-                          %td.xs-show-12
-                            %a.btn.btn-primary.btn-sm Go to Site
-                        %tr
-                          %td.xs-show-3
-                            %img{src: "http://placehold.it/88x31"}
-                          %td.product-name.xs-show-9
-                            %a{href: "#"} Home Loan Offer
-                          %td.xs-show-4
-                            %strong 3.99%
-                            %br
-                            %span Variable
-                          %td.xs-show-4
-                            %strong 3.99%
-                          %td.xs-show-4
-                            %strong $0,000
-                          %td.xs-show-12
-                            %a.btn.btn-primary.btn-sm Go to Site
-                        %tr
-                          %td.xs-show-3
-                            %img{src: "http://placehold.it/88x31"}
-                          %td.product-name.xs-show-9
-                            %a{href: "#"} Home Loan Offer
-                          %td.xs-show-4
-                            %strong 3.99%
-                            %br
-                            %span Variable
-                          %td.xs-show-4
-                            %strong 3.99%
-                          %td.xs-show-4
-                            %strong $0,000
-                          %td.xs-show-12
-                            %a.btn.btn-primary.btn-sm Go to Site
-                        %tr
-                          %td.xs-show-3
-                            %img{src: "http://placehold.it/88x31"}
-                          %td.product-name.xs-show-9
-                            %a{href: "#"} Home Loan Offer
-                          %td.xs-show-4
-                            %strong 3.99%
-                            %br
-                            %span Variable
-                          %td.xs-show-4
-                            %strong 3.99%
-                          %td.xs-show-4
-                            %strong $0,000
-                          %td.xs-show-12
-                            %a.btn.btn-primary.btn-sm Go to Site
-                        %tr
-                          %td.xs-show-3
-                            %img{src: "http://placehold.it/88x31"}
-                          %td.product-name.xs-show-9
-                            %a{href: "#"} Home Loan Offer
-                          %td.xs-show-4
-                            %strong 3.99%
-                            %br
-                            %span Variable
-                          %td.xs-show-4
-                            %strong 3.99%
-                          %td.xs-show-4
-                            %strong $0,000
-                          %td.xs-show-12
-                            %a.btn.btn-primary.btn-sm Go to Site
-
-                .row
-                  .col-sm-12
-                    %a.btn.btn-default.btn-block{role: "button", data-toggle: "collapse", data-target: "#amort-table", aria-controls: "amortisation-table", style: "margin-bottom: 12px;"}
-                      %span.fa.fa-table
-                      View amortisation table
-                #amort-table.collapse
+                      %strong
+                        Repayment amount:
+                        %br
+                        %span.amount $<span class="repayment-amount"></span>
+                    .col-sm-4
+                      %strong
+                        Total amount payable:
+                        %br
+                        %span.amount $000,000
+                    .col-sm-4
+                      %strong
+                        Total interest payable:
+                        %br
+                        %span.amount $000,000
                   .row
                     .col-sm-12
-                      %table.table.table-condensed.table-striped.table-bordered.table-amort
+                      .chart-holder{style: "max-width:558px;"}
+                        #chart{style: "height: 350px;"}
+                  .row.row-mb
+                    .col-sm-12
+                      %legend Home loans matching your criteria
+                      %table.table.table-condensed.table-striped.table-bordered.table-rate
                         %tbody
+                          %tr.hidden-xs
+                            %th Company
+                            %th Product
+                            %th Advertised Rate
+                            %th Comparison Rate
+                            %th Monthly repayment
+                            %th{data-toggle: "tooltip", title: "Lorem ipsum dolor sit amet.", data-placement: "left"} Go to Site
                           %tr
-                            %th Years
-                            %th Interest p/a
-                            %th Principal
-                            %th Owing
+                            %td.xs-show-3
+                              %img{src: "http://placehold.it/88x31"}
+                            %td.product-name.xs-show-9
+                              %a{href: "#"} Home Loan Offer
+                            %td.xs-show-4
+                              %strong 3.99%
+                              %br
+                              %span Variable
+                            %td.xs-show-4
+                              %strong 3.99%
+                            %td.xs-show-4
+                              %strong $0,000
+                            %td.xs-show-12
+                              %a.btn.btn-primary.btn-sm Go to Site
                           %tr
-                            %td 0
-                            %td $100,000
-                            %td $1,000,000
-                            %td $1,000,000
+                            %td.xs-show-3
+                              %img{src: "http://placehold.it/88x31"}
+                            %td.product-name.xs-show-9
+                              %a{href: "#"} Home Loan Offer
+                            %td.xs-show-4
+                              %strong 3.99%
+                              %br
+                              %span Variable
+                            %td.xs-show-4
+                              %strong 3.99%
+                            %td.xs-show-4
+                              %strong $0,000
+                            %td.xs-show-12
+                              %a.btn.btn-primary.btn-sm Go to Site
                           %tr
-                            %td 1
-                            %td $00,000
-                            %td $000,000
-                            %td $000,000
+                            %td.xs-show-3
+                              %img{src: "http://placehold.it/88x31"}
+                            %td.product-name.xs-show-9
+                              %a{href: "#"} Home Loan Offer
+                            %td.xs-show-4
+                              %strong 3.99%
+                              %br
+                              %span Variable
+                            %td.xs-show-4
+                              %strong 3.99%
+                            %td.xs-show-4
+                              %strong $0,000
+                            %td.xs-show-12
+                              %a.btn.btn-primary.btn-sm Go to Site
                           %tr
-                            %td 2
-                            %td $00,000
-                            %td $000,000
-                            %td $000,000
+                            %td.xs-show-3
+                              %img{src: "http://placehold.it/88x31"}
+                            %td.product-name.xs-show-9
+                              %a{href: "#"} Home Loan Offer
+                            %td.xs-show-4
+                              %strong 3.99%
+                              %br
+                              %span Variable
+                            %td.xs-show-4
+                              %strong 3.99%
+                            %td.xs-show-4
+                              %strong $0,000
+                            %td.xs-show-12
+                              %a.btn.btn-primary.btn-sm Go to Site
                           %tr
-                            %td 3
-                            %td $00,000
-                            %td $000,000
-                            %td $000,000
-                          %tr
-                            %td 4
-                            %td $00,000
-                            %td $000,000
-                            %td $000,000
-                          %tr
-                            %td 5
-                            %td $00,000
-                            %td $000,000
-                            %td $000,000
-                          %tr
-                            %td 6
-                            %td $00,000
-                            %td $000,000
-                            %td $000,000
-                          %tr
-                            %td 7
-                            %td $00,000
-                            %td $000,000
-                            %td $000,000
-                          %tr
-                            %td 8
-                            %td $00,000
-                            %td $000,000
-                            %td $000,000
-                          %tr
-                            %td 9
-                            %td $00,000
-                            %td $000,000
-                            %td $000,000
-                          %tr
-                            %td 10
-                            %td $00,000
-                            %td $000,000
-                            %td $000,000
+                            %td.xs-show-3
+                              %img{src: "http://placehold.it/88x31"}
+                            %td.product-name.xs-show-9
+                              %a{href: "#"} Home Loan Offer
+                            %td.xs-show-4
+                              %strong 3.99%
+                              %br
+                              %span Variable
+                            %td.xs-show-4
+                              %strong 3.99%
+                            %td.xs-show-4
+                              %strong $0,000
+                            %td.xs-show-12
+                              %a.btn.btn-primary.btn-sm Go to Site
 
-      .row{style: "margin-top: 12px;"}
-        .col-xs-6.fine-print
-          %small
-            %a{tabindex: "0", role: "button", data-toggle: "popover", data-trigger: "focus", data-placement: "top", title: "This is the disclaimer", data-content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel optio voluptatibus blanditiis pariatur quo impedit ducimus rem necessitatibus, ab dignissimos aspernatur molestiae quae harum minima expedita nisi, sed officia ipsa."} Disclaimer
-          %small
-            %a{tabindex: "0", role: "button", data-toggle: "popover", data-trigger: "focus", data-placement: "top", title: "Our assumptions", data-content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel optio voluptatibus blanditiis pariatur quo impedit ducimus rem necessitatibus, ab dignissimos aspernatur molestiae quae harum minima expedita nisi, sed officia ipsa."} Assumptions
-        .col-xs-6.action-icons.text-right
-          %a{href: "#", data-toggle: "tooltip", data-placement: "top", title: "Share"}
-            %span.fa.fa-share
-          %a{href: "#", data-toggle: "tooltip", data-placement: "top", title: "Print"}
-            %span.fa.fa-print
-          %a{href: "#", data-toggle: "tooltip", data-placement: "top", title: "Email"}
-            %span.fa.fa-envelope-o
-          %a{href: "#", data-toggle: "tooltip", data-placement: "top", title: "Like on Facebook"}
-            %span.fa.fa-facebook
+                  .row
+                    .col-sm-12
+                      %a.btn.btn-default.btn-block{role: "button", data-toggle: "collapse", data-target: "#amort-table", aria-controls: "amortisation-table", style: "margin-bottom: 12px;"}
+                        %span.fa.fa-table
+                        View amortisation table
+                  #amort-table.addcollapse
+                    .row
+                      .col-sm-12
+                        %table.table.table-condensed.table-striped.table-bordered.table-amort
+                          %tbody
+                            %tr
+                              %th Years
+                              %th Interest p/a
+                              %th Principal
+                              %th Owing
+                            %tr
+                              %td 0
+                              %td $100,000
+                              %td $1,000,000
+                              %td $1,000,000
+                            %tr
+                              %td 1
+                              %td $00,000
+                              %td $000,000
+                              %td $000,000
+                            %tr
+                              %td 2
+                              %td $00,000
+                              %td $000,000
+                              %td $000,000
+                            %tr
+                              %td 3
+                              %td $00,000
+                              %td $000,000
+                              %td $000,000
+                            %tr
+                              %td 4
+                              %td $00,000
+                              %td $000,000
+                              %td $000,000
+                            %tr
+                              %td 5
+                              %td $00,000
+                              %td $000,000
+                              %td $000,000
+                            %tr
+                              %td 6
+                              %td $00,000
+                              %td $000,000
+                              %td $000,000
+                            %tr
+                              %td 7
+                              %td $00,000
+                              %td $000,000
+                              %td $000,000
+                            %tr
+                              %td 8
+                              %td $00,000
+                              %td $000,000
+                              %td $000,000
+                            %tr
+                              %td 9
+                              %td $00,000
+                              %td $000,000
+                              %td $000,000
+                            %tr
+                              %td 10
+                              %td $00,000
+                              %td $000,000
+                              %td $000,000
+
+        .row{style: "margin-top: 12px;"}
+          .col-xs-6.fine-print
+            %small
+              %a{tabindex: "0", role: "button", data-toggle: "popover", data-trigger: "focus", data-placement: "top", title: "This is the disclaimer", data-content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel optio voluptatibus blanditiis pariatur quo impedit ducimus rem necessitatibus, ab dignissimos aspernatur molestiae quae harum minima expedita nisi, sed officia ipsa."} Disclaimer
+            %small
+              %a{tabindex: "0", role: "button", data-toggle: "popover", data-trigger: "focus", data-placement: "top", title: "Our assumptions", data-content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel optio voluptatibus blanditiis pariatur quo impedit ducimus rem necessitatibus, ab dignissimos aspernatur molestiae quae harum minima expedita nisi, sed officia ipsa."} Assumptions
+          .col-xs-6.action-icons.text-right
+            %a{href: "#", data-toggle: "tooltip", data-placement: "top", title: "Share"}
+              %span.fa.fa-share
+            %a{href: "#", data-toggle: "tooltip", data-placement: "top", title: "Print"}
+              %span.fa.fa-print
+            %a{href: "#", data-toggle: "tooltip", data-placement: "top", title: "Email"}
+              %span.fa.fa-envelope-o
+            %a{href: "#", data-toggle: "tooltip", data-placement: "top", title: "Like on Facebook"}
+              %span.fa.fa-facebook
 
     %script{src: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"}
     %script{src: "js/calculator.js"}
