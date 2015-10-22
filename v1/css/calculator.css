@@ -1,15 +1,12 @@
-body {
-  background: #BFBFBF; }
-
 .container {
-  background: #fff; }
+  max-width: 628px; }
 
-.calculator-container {
-  margin-bottom: 12px; }
-
-hr {
+#mortgage-calculator hr {
   margin: 0;
   border-color: #e6e6e6; }
+
+#mortgage-calculator strong {
+  color: #333; }
 
 span.amount {
   font-size: 20px; }
@@ -19,20 +16,6 @@ legend {
 
 .row-mb {
   margin-bottom: 12px; }
-
-label.control-label {
-  font-weight: normal; }
-
-a.borrow-extra-trigger:hover, a.borrow-extra-trigger:active, a.borrow-extra-trigger:visited, a.borrow-extra-trigger:focus {
-  text-decoration: none; }
-
-a.borrow-extra-trigger .alert {
-  font-size: 16px;
-  margin-top: 12px;
-  margin-bottom: 0; }
-
-.borrow-extra div {
-  background: #f1f1f1; }
 
 table.table.table-amort {
   font-size: 14px;
@@ -67,6 +50,32 @@ table.table.table-rate {
       font-size: 12px; }
   table.table.table-rate.table-striped > tbody > tr:nth-of-type(even) {
     background-color: #f5f5f5; }
+
+.input-group-addon {
+  background-color: #fff; }
+
+.colour-box a {
+  color: #fff; }
+  .colour-box a:hover {
+    color: #fff; }
+  .colour-box a.btn-red {
+    background-color: #E11B3F;
+    border-color: #E11B3F; }
+    .colour-box a.btn-red:hover {
+      background-color: #c61837;
+      border-color: #c61837; }
+  .colour-box a.btn-purple {
+    background-color: #693492;
+    border-color: #693492; }
+    .colour-box a.btn-purple:hover {
+      background-color: #592c7b;
+      border-color: #592c7b; }
+  .colour-box a.btn-blue {
+    background-color: #20ACE4;
+    border-color: #20ACE4; }
+    .colour-box a.btn-blue:hover {
+      background-color: #1999cd;
+      border-color: #1999cd; }
 
 .fa {
   margin-right: 8px; }

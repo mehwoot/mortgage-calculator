@@ -39,4 +39,3 @@ Thumbs.db
 # Other
 node_modules/
 gulpfile.js
-bootstrap/dist
