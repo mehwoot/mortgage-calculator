@@ -36,7 +36,7 @@
                     %a.borrow-extra-trigger{role: "button", data-toggle: "collapse", data-target: ".borrow-extra", aria-controls: "advanced-options"}
                       .alert.alert-info
                         %span.fa.fa-info-circle
-                        %span You will need to borrow $<span id="borrow-total"></span>. Why?
+                        %span &nbsp; You will need to borrow $<span id="borrow-total"></span>. Why?
                         %span.fa.fa-angle-down.pull-right
                   .col-xs-12.borrow-extra.collapse
                     %div
@@ -51,10 +51,10 @@
                     .input-group
                       %input#interestRate.form-control{type: "number", placeholder: 4.5, step: "0.1"}
                       %span.input-group-addon %
-                #advanced-options.addcollapse
+                #advanced-options.collapse
                   .row
                     .col-xs-12
-                      %p.repayment1
+                      %p Advanced options go here
                   -#
                     .form-group
                       .col-sm-4
@@ -73,7 +73,7 @@
                           %option Variable
                           %option Fixed
                           %option Introductory
-                    #intro-loan.addcollapse
+                    #intro-loan.collapse
                       .form-group
                         .col-sm-4.col-sm-offset-4
                           %label.control-label{for: "introRate"} Intro Rate
@@ -91,126 +91,71 @@
                       Advanced Options&nbsp;
                       %span.fa.fa-caret-down
                 .row
-                  .col-xs-4.col-xs-offset-4
-                    %a#results-button.btn.btn-primary.btn-lg.btn-block{role: "button", aria-controls: "your-results"}
+                  .col-sm-4.col-sm-offset-4.col-xs-6.col-xs-offset-3
+                    %a#results-button.btn.btn-primary.btn-lg.btn-block.adddisabled{role: "button", aria-controls: "your-results"}
                       Calculate Now
-                #your-results.addcollapse
-                  .row.row-mb
-                    .col-sm-12
-                      %legend Your results
-                    .col-sm-4
-                      %strong
-                        Repayment amount:
-                        %br
-                        %span.amount $<span class="repayment-amount"></span>
-                    .col-sm-4
-                      %strong
-                        Total amount payable:
-                        %br
-                        %span.amount $000,000
-                    .col-sm-4
-                      %strong
-                        Total interest payable:
-                        %br
-                        %span.amount $000,000
+                #your-results.collapse
                   .row
                     .col-sm-12
-                      .chart-holder{style: "max-width:558px;"}
-                        #chart{style: "height: 350px;"}
+                      %legend Your repayment outlook
+                  .row
+                    .col-sm-12
+                      .chart-holder{style: "max-width:100%;"}
+                        #rate-chart{style: "height: 300px;"}
+                  .row.row-5ths.row-mb
+                    .col-xs-5ths{data-offer: "0"}
+                    .col-xs-5ths{data-offer: "1"}
+                    .col-xs-5ths{data-offer: "2"}
+                    .col-xs-5ths{data-offer: "3"}
+                    .col-xs-5ths{data-offer: "4"}
+                  .row
+                    .col-xs-12
+                      %ul.nav.nav-tabs.nav-justified.graph-tabs{role: "tablist"}
+                        %li.text-center{role: "presentation"}
+                          %a{href: "#", data-graph: "0", data-toggle: "tab", href: "#graph-0", aria-controls: "graph-0"}
+                            %i.fa.fa-area-chart
+                            %br
+                            Graph
+                        %li.text-center{role: "presentation"}
+                          %a{href: "#", data-graph: "1", data-toggle: "tab", href: "#graph-1", aria-controls: "graph-1"}
+                            %i.fa.fa-area-chart
+                            %br
+                            Graph
+                        %li.text-center{role: "presentation"}
+                          %a{href: "#", data-graph: "2", data-toggle: "tab", href: "#graph-2", aria-controls: "graph-2"}
+                            %i.fa.fa-area-chart
+                            %br
+                            Graph
+                        %li.text-center{role: "presentation", class: "active"}
+                          %a{href: "#", data-graph: "3", data-toggle: "tab", href: "#graph-3", aria-controls: "graph-3"}
+                            %i.fa.fa-area-chart
+                            %br
+                            Graph
+                        %li.text-center{role: "presentation"}
+                          %a{href: "#", data-graph: "4", data-toggle: "tab", href: "#graph-4", aria-controls: "graph-4"}
+                            %i.fa.fa-area-chart
+                            %br
+                            Graph
+
                   .row.row-mb
                     .col-sm-12
-                      %legend Home loans matching your criteria
-                      %table.table.table-condensed.table-striped.table-bordered.table-rate
-                        %tbody
-                          %tr.hidden-xs
-                            %th Company
-                            %th Product
-                            %th Advertised Rate
-                            %th Comparison Rate
-                            %th Monthly repayment
-                            %th{data-toggle: "tooltip", title: "Lorem ipsum dolor sit amet.", data-placement: "left"} Go to Site
-                          %tr
-                            %td.xs-show-3
-                              %img{src: "http://placehold.it/88x31"}
-                            %td.product-name.xs-show-9
-                              %a{href: "#"} Home Loan Offer
-                            %td.xs-show-4
-                              %strong 3.99%
-                              %br
-                              %span Variable
-                            %td.xs-show-4
-                              %strong 3.99%
-                            %td.xs-show-4
-                              %strong $0,000
-                            %td.xs-show-12
-                              %a.btn.btn-primary.btn-sm Go to Site
-                          %tr
-                            %td.xs-show-3
-                              %img{src: "http://placehold.it/88x31"}
-                            %td.product-name.xs-show-9
-                              %a{href: "#"} Home Loan Offer
-                            %td.xs-show-4
-                              %strong 3.99%
-                              %br
-                              %span Variable
-                            %td.xs-show-4
-                              %strong 3.99%
-                            %td.xs-show-4
-                              %strong $0,000
-                            %td.xs-show-12
-                              %a.btn.btn-primary.btn-sm Go to Site
-                          %tr
-                            %td.xs-show-3
-                              %img{src: "http://placehold.it/88x31"}
-                            %td.product-name.xs-show-9
-                              %a{href: "#"} Home Loan Offer
-                            %td.xs-show-4
-                              %strong 3.99%
-                              %br
-                              %span Variable
-                            %td.xs-show-4
-                              %strong 3.99%
-                            %td.xs-show-4
-                              %strong $0,000
-                            %td.xs-show-12
-                              %a.btn.btn-primary.btn-sm Go to Site
-                          %tr
-                            %td.xs-show-3
-                              %img{src: "http://placehold.it/88x31"}
-                            %td.product-name.xs-show-9
-                              %a{href: "#"} Home Loan Offer
-                            %td.xs-show-4
-                              %strong 3.99%
-                              %br
-                              %span Variable
-                            %td.xs-show-4
-                              %strong 3.99%
-                            %td.xs-show-4
-                              %strong $0,000
-                            %td.xs-show-12
-                              %a.btn.btn-primary.btn-sm Go to Site
-                          %tr
-                            %td.xs-show-3
-                              %img{src: "http://placehold.it/88x31"}
-                            %td.product-name.xs-show-9
-                              %a{href: "#"} Home Loan Offer
-                            %td.xs-show-4
-                              %strong 3.99%
-                              %br
-                              %span Variable
-                            %td.xs-show-4
-                              %strong 3.99%
-                            %td.xs-show-4
-                              %strong $0,000
-                            %td.xs-show-12
-                              %a.btn.btn-primary.btn-sm Go to Site
+                      .tab-content
+                        #graph-0.tab-pane{style: "max-width:558px;", role: "tabpanel"}
+                          .repayment-chart{style: "height: 300px;"}
+                        #graph-1.tab-pane{style: "max-width:558px;", role: "tabpanel"}
+                          .repayment-chart{style: "height: 300px;"}
+                        #graph-2.tab-pane{style: "max-width:558px;", role: "tabpanel"}
+                          .repayment-chart{style: "height: 300px;"}
+                        #graph-3.tab-pane.active{style: "max-width:558px;", role: "tabpanel"}
+                          .repayment-chart{style: "height: 300px;"}
+                        #graph-4.tab-pane{style: "max-width:558px;", role: "tabpanel"}
+                          .repayment-chart{style: "height: 300px;"}
 
                   .row
                     .col-sm-12
                       %a.btn.btn-default.btn-block{role: "button", data-toggle: "collapse", data-target: "#amort-table", aria-controls: "amortisation-table", style: "margin-bottom: 12px;"}
-                        %span.fa.fa-table
                         View amortisation table
-                  #amort-table.addcollapse
+                  #amort-table.collapse
                     .row
                       .col-sm-12
                         %table.table.table-condensed.table-striped.table-bordered.table-amort
@@ -282,16 +227,10 @@
               %a{tabindex: "0", role: "button", data-toggle: "popover", data-trigger: "focus", data-placement: "top", title: "This is the disclaimer", data-content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel optio voluptatibus blanditiis pariatur quo impedit ducimus rem necessitatibus, ab dignissimos aspernatur molestiae quae harum minima expedita nisi, sed officia ipsa."} Disclaimer
             %small
               %a{tabindex: "0", role: "button", data-toggle: "popover", data-trigger: "focus", data-placement: "top", title: "Our assumptions", data-content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel optio voluptatibus blanditiis pariatur quo impedit ducimus rem necessitatibus, ab dignissimos aspernatur molestiae quae harum minima expedita nisi, sed officia ipsa."} Assumptions
-          .col-xs-6.action-icons.text-right
-            %a{href: "#", data-toggle: "tooltip", data-placement: "top", title: "Share"}
-              %span.fa.fa-share
-            %a{href: "#", data-toggle: "tooltip", data-placement: "top", title: "Print"}
-              %span.fa.fa-print
-            %a{href: "#", data-toggle: "tooltip", data-placement: "top", title: "Email"}
-              %span.fa.fa-envelope-o
-            %a{href: "#", data-toggle: "tooltip", data-placement: "top", title: "Like on Facebook"}
-              %span.fa.fa-facebook
 
     %script{src: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"}
+    %script{src: "js/borrow-calculator.js"}
+    %script{src: "js/rate-chart.js"}
+    %script{src: "js/repayment-calculator.js"}
     %script{src: "js/calculator.js"}
     %script{src: "http://code.highcharts.com/highcharts.js"}

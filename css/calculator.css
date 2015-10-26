@@ -23,6 +23,9 @@ legend {
 label.control-label {
   font-weight: normal; }
 
+#results-button.btn.disabled, .btn[disabled], #results-button {
+  transition: all 0.5s cubic-bezier(0, 0, 0.58, 1); }
+
 a.borrow-extra-trigger:hover, a.borrow-extra-trigger:active, a.borrow-extra-trigger:visited, a.borrow-extra-trigger:focus {
   text-decoration: none; }
 
@@ -33,6 +36,10 @@ a.borrow-extra-trigger .alert {
 
 .borrow-extra div {
   background: #f1f1f1; }
+
+.btn-rate-graph {
+  padding: 5px 15px;
+  line-height: 1; }
 
 table.table.table-amort {
   font-size: 14px;
@@ -68,9 +75,6 @@ table.table.table-rate {
   table.table.table-rate.table-striped > tbody > tr:nth-of-type(even) {
     background-color: #f5f5f5; }
 
-.fa {
-  margin-right: 8px; }
-
 .fine-print a {
   margin-right: 10px;
   color: #999; }
@@ -85,6 +89,52 @@ table.table.table-rate {
 
 .action-icons .fa:nth-last-child {
   margin-right: 0; }
+
+.nav > li > a {
+  padding: 5px;
+  color: #888; }
+
+.row.row-5ths {
+  margin-left: 0;
+  margin-right: 0; }
+
+.col-xs-5ths,
+.col-sm-5ths,
+.col-md-5ths,
+.col-lg-5ths {
+  position: relative;
+  min-height: 1px;
+  padding-right: 10px;
+  padding-left: 10px;
+  text-align: center; }
+
+.col-xs-5ths {
+  width: 20%;
+  float: left; }
+
+@media (min-width: 600px) {
+  .row.row-5ths {
+    margin-left: 15px;
+    margin-right: 15px; }
+  .col-sm-5ths {
+    width: 20%;
+    float: left; } }
+
+@media (min-width: 992px) {
+  .row.row-5ths {
+    margin-left: 15px;
+    margin-right: 15px; }
+  .col-md-5ths {
+    width: 20%;
+    float: left; } }
+
+@media (min-width: 1200px) {
+  .row.row-5ths {
+    margin-left: 15px;
+    margin-right: 15px; }
+  .col-lg-5ths {
+    width: 20%;
+    float: left; } }
 
 @media (max-width: 600px) {
   .table-rate > tbody > tr {
@@ -112,6 +162,9 @@ table.table.table-rate {
   label {
     margin-top: 5px;
     margin-bottom: 0; }
+  .nav-justified > li, .nav-tabs.nav-justified > li {
+    float: left;
+    width: 20%; }
   .fg-nm {
     margin-bottom: 0; }
   table.table.table-amort > tbody > tr > th, table.table.table-amort > tbody > tr > td {
