@@ -85,7 +85,7 @@ var addOfferBadge = function(name, img, imgWidth, index) {
     });
     index = findYouIndex + 1;
   }
-  column = $('#rate-chart g.highcharts-series rect:nth-of-type('+index+')');
+  column = $('#rate-chart g.highcharts-series rect:nth-of-type(' + index + ')');
   colPosition = column.position();
   colSize = column.attr('width');
   return $('#rate-chart').highcharts().renderer.image(img, colPosition.left + Math.round((colSize / 2)) - Math.round((imgWidth / 2)), colPosition.top - 37, 45, 35).add();
