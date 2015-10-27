@@ -18,7 +18,7 @@
           .col-sm-12
             .row
               .col-sm-12
-                %legend Mortgage Calculator
+                %legend Mortgage Repayment Calculator
             %form.form-horizontal
               %fieldset
                 .form-group.fg-nm
@@ -91,7 +91,7 @@
                       Advanced Options&nbsp;
                       %span.fa.fa-caret-down
                 .row
-                  .col-sm-4.col-sm-offset-4.col-xs-6.col-xs-offset-3
+                  .col-sm-4.col-sm-offset-4.col-xs-8.col-xs-offset-2
                     %a#results-button.btn.btn-primary.btn-lg.btn-block.adddisabled{role: "button", aria-controls: "your-results"}
                       Calculate Now
                 #your-results.collapse
@@ -108,30 +108,33 @@
                     .col-xs-5ths{data-offer: "2"}
                     .col-xs-5ths{data-offer: "3"}
                     .col-xs-5ths{data-offer: "4"}
-                  .row
-                    .col-xs-12
-                      %ul.nav.nav-tabs.nav-justified.graph-tabs{role: "tablist"}
-                        %li.text-center{role: "presentation"}
+                  .row.row-5ths.graph-tabs
+                    .col-xs-5ths.text-center
+                        %li.graph-tab{role: "presentation"}
                           %a{href: "#", data-graph: "0", data-toggle: "tab", href: "#graph-0", aria-controls: "graph-0"}
                             %i.fa.fa-area-chart
                             %br
                             Graph
-                        %li.text-center{role: "presentation"}
+                    .col-xs-5ths.text-center
+                        %li.graph-tab{role: "presentation"}
                           %a{href: "#", data-graph: "1", data-toggle: "tab", href: "#graph-1", aria-controls: "graph-1"}
                             %i.fa.fa-area-chart
                             %br
                             Graph
-                        %li.text-center{role: "presentation"}
+                    .col-xs-5ths.text-center
+                        %li.graph-tab{role: "presentation"}
                           %a{href: "#", data-graph: "2", data-toggle: "tab", href: "#graph-2", aria-controls: "graph-2"}
                             %i.fa.fa-area-chart
                             %br
                             Graph
-                        %li.text-center{role: "presentation", class: "active"}
+                    .col-xs-5ths.text-center
+                        %li.graph-tab{role: "presentation", class: "active"}
                           %a{href: "#", data-graph: "3", data-toggle: "tab", href: "#graph-3", aria-controls: "graph-3"}
                             %i.fa.fa-area-chart
                             %br
                             Graph
-                        %li.text-center{role: "presentation"}
+                    .col-xs-5ths.text-center
+                        %li.graph-tab{role: "presentation"}
                           %a{href: "#", data-graph: "4", data-toggle: "tab", href: "#graph-4", aria-controls: "graph-4"}
                             %i.fa.fa-area-chart
                             %br
@@ -140,15 +143,15 @@
                   .row.row-mb
                     .col-sm-12
                       .tab-content
-                        #graph-0.tab-pane{role: "tabpanel"}
+                        #graph-0.tab-pane.in{role: "tabpanel"}
                           .repayment-chart{style: "height: 300px;"}
-                        #graph-1.tab-pane{role: "tabpanel"}
+                        #graph-1.tab-pane.in{role: "tabpanel"}
                           .repayment-chart{style: "height: 300px;"}
-                        #graph-2.tab-pane{role: "tabpanel"}
+                        #graph-2.tab-pane.in{role: "tabpanel"}
                           .repayment-chart{style: "height: 300px;"}
-                        #graph-3.tab-pane.active{role: "tabpanel"}
+                        #graph-3.tab-pane.in.active{role: "tabpanel"}
                           .repayment-chart{style: "height: 300px;"}
-                        #graph-4.tab-pane{role: "tabpanel"}
+                        #graph-4.tab-pane.in{role: "tabpanel"}
                           .repayment-chart{style: "height: 300px;"}
 
                   .row

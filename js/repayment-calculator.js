@@ -44,7 +44,8 @@ $(document).ready(function() {
         enabled: false
       },
       chart: {
-        type: 'area'
+        type: 'area',
+        animation: false
       },
       title: {
         text: 'Repayment Graph'
@@ -59,6 +60,9 @@ $(document).ready(function() {
         title: {
           text: 'Value ($)'
         }
+      },
+      tooltip: {
+        xDateFormat: '%Y'
       },
       legend: {
         align: 'left',
@@ -85,7 +89,8 @@ $(document).ready(function() {
         },
         series: {
           pointStart: Date.UTC(2015, 0, 1),
-          pointInterval: 24 * 3600 * 1000 * 365
+          pointInterval: 24 * 3600 * 1000 * 365,
+          animation: false
         }
       },
       series: data

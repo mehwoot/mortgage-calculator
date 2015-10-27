@@ -39,18 +39,39 @@ $(document).ready(function(){
 
   $('[data-graph="0"]').click(function(e){
     drawRepaymentChart('#graph-0 .repayment-chart', fullDataSet[0]);
+    setTimeout(function(){
+      $('#graph-0 .repayment-chart').highcharts().reflow();
+    }, 0);
+
   });
   $('[data-graph="1"]').click(function(e){
     drawRepaymentChart('#graph-1 .repayment-chart', fullDataSet[1]);
+    setTimeout(function(){
+      $('#graph-1 .repayment-chart').highcharts().reflow();
+    }, 0);
   });
   $('[data-graph="2"]').click(function(e){
     drawRepaymentChart('#graph-2 .repayment-chart', fullDataSet[2]);
+    setTimeout(function(){
+      $('#graph-2 .repayment-chart').highcharts().reflow();
+    }, 0);
   });
   $('[data-graph="3"]').click(function(e){
     drawRepaymentChart('#graph-3 .repayment-chart', fullDataSet[3]);
+    setTimeout(function(){
+      $('#graph-3 .repayment-chart').highcharts().reflow();
+    }, 0);
   });
   $('[data-graph="4"]').click(function(e){
     drawRepaymentChart('#graph-4 .repayment-chart', fullDataSet[4]);
+    setTimeout(function(){
+      $('#graph-4 .repayment-chart').highcharts().reflow();
+    }, 0);
+  });
+
+  // Make custom tab active class work
+  $('[data-toggle="tab"]').click(function() {
+    $('.graph-tabs li.graph-tab').removeClass('active');
   });
 
   // TODO: Add proper validation

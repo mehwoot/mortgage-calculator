@@ -81,7 +81,7 @@ createOfferButtons = function(){
   for (var i = 0; i < offerData.length; i++) {
     $('*[data-offer="'+i+'"]').empty().prepend('<a href="' + offerData[i].URL + '" class="btn btn-primary btn-sm btn-rate-graph">View<br/>Offer</a>');
     if ( offerData[i].name == "You") {
-      $('*[data-offer="'+i+'"]').empty().append('<span class="btn btn-default btn-sm btn-rate-graph disabled text-center">Your<br/>graph<br/><i class="fa fa-chevron-down"></i>');
+      $('*[data-offer="'+i+'"]').empty().append('<span class="text-center btn-rate-graph" style="color: #999;">You</span>');
     }
   }
 }
@@ -105,11 +105,11 @@ $(document).ready(function() {
         categories: offerNames.name,
         labels: {
           rotation: -90,
-          x: -43,
+          x: -36,
           y: -43,
           useHTML: true,
           formatter: function() {
-            return '<img src="' + offerData[this.value].imgURL + '" height="28"/>';
+            return '<img src="' + offerData[this.value].imgURL + '" height="24"/>';
           },
           style: {
             color: '#000',
