@@ -15,7 +15,10 @@ label.control-label {
   font-weight: normal;
 }
 
-.highcharts-container{width:100% !important; height:100% !important;}
+.highcharts-container{
+  width:100% !important;
+  height:100% !important;
+}
 
 #results-button.btn.disabled, .btn[disabled], #results-button { transition: all 0.5s cubic-bezier(0.000, 0.000, 0.580, 1.000); }
 
@@ -63,6 +66,7 @@ li.graph-tab {
   a {
     color: #999;
     text-decoration: none;
+    display: block;
   }
   .fa { font-size: 14px; }
 }

@@ -67,7 +67,8 @@ li.graph-tab {
       color: #666; }
   li.graph-tab a {
     color: #999;
-    text-decoration: none; }
+    text-decoration: none;
+    display: block; }
   li.graph-tab .fa {
     font-size: 14px; }
 

@@ -121,6 +121,7 @@ $(document).ready(function() {
         minorGridLineWidth: 0,
         lineColor: 'transparent',
         minorTickLength: 0,
+        tickInterval: 1,
         tickLength: 0
       },
       yAxis: {
