@@ -13,17 +13,17 @@ offerData = [{
   y: 1800,
   imgURL: "http://cdn.ratecity.com.au/companies/logo/moa/small_moa_logo.png",
   URL: "http://google2.com"
-}, {
-  name: "You",
-  y: 1850,
-  imgURL: "http://i.imgur.com/1HMpTLT.png",
-  URL: "http://google3.com"
-}, {
-  name: "Bank of Melbourne",
-  y: 1950,
-  imgURL: "http://cdn.ratecity.com.au/companies/logo/cua/small_cua_logo.jpg",
-  URL: "http://google4.com"
-}]
+  }, {
+    name: "You",
+    y: 1850,
+    imgURL: "http://i.imgur.com/1HMpTLT.png",
+    URL: "http://google3.com"
+  }, {
+    name: "Bank of Melbourne",
+    y: 1950,
+    imgURL: "http://cdn.ratecity.com.au/companies/logo/cua/small_cua_logo.jpg",
+    URL: "http://google4.com"
+  }]
 
 // Sort data into ascending order
 offerData.sort(function(a, b) {
@@ -56,7 +56,7 @@ ymax = Math.max.apply(Math, offerData.map(function(o) {
   return o.y;
 }));
 
-// Add lines at the top of each column
+// Add plot lines to the top of each column
 drawPlotLines = function() {
   $.each(plotLines, function(index, value) {
     $('#rate-chart').highcharts().yAxis[0].addPlotLine({
@@ -66,9 +66,10 @@ drawPlotLines = function() {
       label: {
         text: "$" + plotLines[index].value,
         align: "left",
-        y: -3,
+        y: 4,
+        x: -45,
         style: {
-          color: "white",
+          color: "black",
           fontSize: "11px"
         }
       }
@@ -128,8 +129,14 @@ $(document).ready(function() {
         title: {
           text: ''
         },
+        offset: 35,
         labels: {
-          enabled: false
+          enabled: false,
+          zIndex: -5,
+          style: {
+            fontSize: '10px',
+            color: '#fff'
+          }
         },
         min: ymin - 400,
         max: ymax,
