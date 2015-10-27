@@ -35,6 +35,10 @@ $(document).ready(function(){
     drawPlotLines();
     createOfferButtons();
     drawRepaymentChart('#graph-3 .repayment-chart', fullDataSet[3]);
+    setTimeout(function(){
+      addOfferBadge("First", 'http://i.imgur.com/NMvcUmJ.png', 45, 1);
+      addOfferBadge("You", 'http://i.imgur.com/GCXWNT3.png', 45);
+    }, 1000);
   });
 
   $('[data-graph="0"]').click(function(e){

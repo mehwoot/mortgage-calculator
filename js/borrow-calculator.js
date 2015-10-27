@@ -46,7 +46,7 @@ $(document).ready(function(){
           useHTML: true,
           labelFormatter: function() {
               return this.name + ': <span style="font-weight:normal">$' + currency(this.y) + '</span>';
-				}
+				  }
         },
         tooltip: {
             pointFormat: '{series.name}: <b>${point.y:,.0f}</b>'

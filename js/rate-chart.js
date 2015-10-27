@@ -77,6 +77,20 @@ drawPlotLines = function() {
   });
 }
 
+// Offer badges
+var addOfferBadge = function(name, img, imgWidth, index) {
+  if ( name == "You" ) {
+    findYouIndex = offerData.findIndex(function (element) {
+        return element.name === "You";
+    });
+    index = findYouIndex + 1;
+  }
+  column = $('#rate-chart g.highcharts-series rect:nth-of-type('+index+')');
+  colPosition = column.position();
+  colSize = column.attr('width');
+  return $('#rate-chart').highcharts().renderer.image(img, colPosition.left + Math.round((colSize / 2)) - Math.round((imgWidth / 2)), colPosition.top - 37, 45, 35).add();
+}
+
 // Create the offer buttons
 createOfferButtons = function(){
   for (var i = 0; i < offerData.length; i++) {
@@ -88,6 +102,15 @@ createOfferButtons = function(){
 }
 
 $(document).ready(function() {
+  // Image sizes in columns
+  if ( $(window).width() < 436) {
+    colImgSize = 22;
+    colImgX = -32;
+  } else {
+    colImgSize = 31;
+    colImgX = -48;
+  }
+
   drawRateChart = function() {
     $('#rate-chart').highcharts({
       colors: ['#fff'],
@@ -106,11 +129,11 @@ $(document).ready(function() {
         categories: offerNames.name,
         labels: {
           rotation: -90,
-          x: -36,
+          x: colImgX,
           y: -43,
           useHTML: true,
           formatter: function() {
-            return '<img src="' + offerData[this.value].imgURL + '" height="24"/>';
+            return '<img src="' + offerData[this.value].imgURL + '" height="'+colImgSize+'"/>';
           },
           style: {
             color: '#000',
