@@ -1,52 +1,39 @@
 offerData = [{
   name: "SocietyOne",
-  y: 1500,
+  y: 1650,
   imgURL: "http://cdn.ratecity.com.au/companies/logo/sban/small_sban_logo.jpg",
-  URL: "http://google.com"
+  URL: "#",
+  rate: '4'
 }, {
   name: "HSBC",
-  y: 1700,
+  y: 1689,
   imgURL: "http://cdn.ratecity.com.au/companies/logo/lcom/small_lcom_logo.png",
-  URL: "http://google1.com"
+  URL: "#",
+  rate: '5'
 }, {
   name: "RACV",
-  y: 1800,
+  y: 1733,
   imgURL: "http://cdn.ratecity.com.au/companies/logo/moa/small_moa_logo.png",
-  URL: "http://google2.com"
+  URL: "#",
+  rate: '6'
   }, {
-    name: "You",
-    y: 1850,
-    imgURL: "http://i.imgur.com/1HMpTLT.png",
-    URL: "http://google3.com"
-  }, {
-    name: "Bank of Melbourne",
-    y: 1950,
-    imgURL: "http://cdn.ratecity.com.au/companies/logo/cua/small_cua_logo.jpg",
-    URL: "http://google4.com"
-  }]
+  name: "You",
+  y: 1756,
+  imgURL: "https://raw.githubusercontent.com/ratecity/mortgage-calculator/gh-pages/img/youman.png",
+  URL: "#",
+  rate: '7'
+}, {
+  name: "Bank of Melbourne",
+  y: 1797,
+  imgURL: "http://cdn.ratecity.com.au/companies/logo/cua/small_cua_logo.jpg",
+  URL: "#",
+  rate: '8'
+}]
 
 // Sort data into ascending order
 offerData.sort(function(a, b) {
   return parseFloat(a.y) - parseFloat(b.y);
 });
-
-// Data for plotlines
-var plotLines = [];
-for (var i = 0; i < offerData.length; i++) {
-  plotLines.push({
-    value: offerData[i].y,
-    color: "red",
-    width: 1
-  });
-}
-
-// Data for names
-var offerNames = [];
-for (var i = 0; i < offerData.length; i++) {
-  offerNames.push(
-    {name: offerData[i].name,
-    imgURL: offerData[i].imgURL});
-}
 
 // Generate min and max values for rate graph
 ymin = Math.min.apply(Math, offerData.map(function(o) {
@@ -56,21 +43,109 @@ ymax = Math.max.apply(Math, offerData.map(function(o) {
   return o.y;
 }));
 
+// Generate and style plotlines
+var plotLines = [];
+for (var i = 0; i < offerData.length; i++) {
+  if (offerData[i] == offerData[0]) {
+    plotLines.push({
+      value: offerData[i].y,
+      color: '#F98F40',
+      bgColor: '#F98F40',
+      textColor: '#fff',
+      textWeight: 'bold',
+      paddingLeft: '3px',
+      paddingRight: '3px',
+      paddingBottom: '1px',
+      borderRadius: '3px'
+    })
+  } else if (offerData[i].name == "You") {
+    plotLines.push({
+      value: offerData[i].y,
+      color: '#60C1DC',
+      bgColor: '#60C1DC',
+      textColor: '#fff',
+      textWeight: 'bold',
+      paddingLeft: '3px',
+      paddingRight: '3px',
+      paddingBottom: '1px',
+      borderRadius: '3px'
+    })
+  } else {
+    plotLines.push({
+      value: offerData[i].y,
+      color: '#aaa',
+      bgColor: 'transparent',
+      textColor: '#777',
+      textWeight: 'normal',
+      paddingLeft: '0px',
+      paddingRight: '0px',
+      paddingBottom: '0px',
+      borderRadius: '0px'
+    })
+  }
+}
+
+// Check collision
+function collision($div1, $div2) {
+  var x1 = $div1.offset().left;
+  var y1 = $div1.offset().top;
+  var h1 = $div1.outerHeight(true);
+  var w1 = $div1.outerWidth(true);
+  var b1 = y1 + h1;
+  var r1 = x1 + w1;
+  var x2 = $div2.offset().left;
+  var y2 = $div2.offset().top;
+  var h2 = $div2.outerHeight(true);
+  var w2 = $div2.outerWidth(true);
+  var b2 = y2 + h2;
+  var r2 = x2 + w2;
+
+  if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
+  return true;
+}
+
+// Remove collision
+function removeCollision() {
+  for ( i = 1; i < 5; i++ ) {
+    var next = i + 1;
+    el = $('#rate-chart span:nth-of-type('+i+')');
+    next = $('#rate-chart span:nth-of-type('+next+')');
+    if (collision(el, next) == true) {
+      next.remove();
+      return true;
+    }
+  }
+}
+
+// Run for each plotline
+function runCollision(){
+  for (var i = 0; i < offerData.length; i++) {
+    removeCollision();
+  }
+}
+
 // Add plot lines to the top of each column
-drawPlotLines = function() {
+function drawPlotLines() {
   $.each(plotLines, function(index, value) {
     $('#rate-chart').highcharts().yAxis[0].addPlotLine({
       value: plotLines[index].value - 2,
-      color: '#aaa',
+      color: plotLines[index].color,
       width: 1,
       label: {
         text: "$" + plotLines[index].value,
         align: "left",
         y: 4,
-        x: -45,
+        x: -50,
+        useHTML: true,
         style: {
-          color: "black",
-          fontSize: "11px"
+          backgroundColor: plotLines[index].bgColor,
+          paddingLeft: plotLines[index].paddingLeft,
+          paddingRight: plotLines[index].paddingRight,
+          paddingBottom: plotLines[index].paddingBottom,
+          borderRadius: plotLines[index].borderRadius,
+          color: plotLines[index].textColor,
+          fontWeight: plotLines[index].textWeight,
+          fontSize: "13px"
         }
       }
     });
@@ -78,25 +153,46 @@ drawPlotLines = function() {
 }
 
 // Offer badges
-var addOfferBadge = function(name, img, imgWidth, index) {
+function addOfferBadge(name, img, imgWidth, index) {
   if ( name == "You" ) {
     findYouIndex = offerData.findIndex(function (element) {
         return element.name === "You";
     });
     index = findYouIndex + 1;
   }
-  column = $('#rate-chart g.highcharts-series rect:nth-of-type(' + index + ')');
-  colPosition = column.position();
-  colSize = column.attr('width');
-  return $('#rate-chart').highcharts().renderer.image(img, colPosition.left + Math.round((colSize / 2)) - Math.round((imgWidth / 2)), colPosition.top - 37, 45, 35).add();
+  var column = $('#rate-chart g.highcharts-series rect:nth-of-type('+index+')');
+  var colPosition = column.position();
+  var colSize = column.attr('width');
+  var heightOffset = checkNegativeValue(colPosition.top - 37);
+
+  return $('#rate-chart').highcharts().renderer.image(img, colPosition.left + Math.round((colSize / 2)) - Math.round((imgWidth / 2) + 3), heightOffset, 54, 35).attr({zIndex: 1}).add();
+}
+
+// Column icons
+function addBarIcon(index, img) {
+  index = index + 1;
+  var imgWidth = 31;
+  var column = $('#rate-chart g.highcharts-series rect:nth-of-type('+index+')');
+  var colPosition = column.position();
+  var colWidth = column.attr('width');
+  var colHeight = column.attr('height');
+
+  return $('#rate-chart').highcharts().renderer
+  .image(img, colPosition.left + Math.round((colWidth / 2)) - Math.floor((imgWidth / 2)) + Number(colImgOffset), Number(colPosition.top) + Number(colHeight), 88, colImgSize)
+  .attr({zIndex: 10, rotation: -90, preserveAspectRatio: 'xMinYMin'})
+  .on('mouseover', function(){
+    // TODO: Add mouseover stuff
+
+  })
+  .add();
 }
 
 // Create the offer buttons
-createOfferButtons = function(){
+function createOfferButtons(){
   for (var i = 0; i < offerData.length; i++) {
     $('*[data-offer="'+i+'"]').empty().prepend('<a href="' + offerData[i].URL + '" class="btn btn-primary btn-sm btn-rate-graph">View<br/>Offer</a>');
     if ( offerData[i].name == "You") {
-      $('*[data-offer="'+i+'"]').empty().append('<span class="text-center btn-rate-graph" style="color: #999;">You</span>');
+      $('*[data-offer="'+i+'"]').empty().append('<strong class="text-center btn-rate-graph" style="color: #777;font-size: 13px;font-family:Proxima N W01 At Bold;">YOU</strong>');
     }
   }
 }
@@ -105,14 +201,20 @@ $(document).ready(function() {
   // Image sizes in columns
   if ( $(window).width() < 436) {
     colImgSize = 22;
-    colImgX = -32;
+    colImgOffset = 4;
   } else {
     colImgSize = 31;
-    colImgX = -48;
+    colImgOffset = 0;
+  }
+
+  generateBarIcons = function(){
+    for (var i = 0; i < offerData.length; i++ ) {
+      addBarIcon(i, offerData[i].imgURL);
+    }
   }
 
   drawRateChart = function() {
-    $('#rate-chart').highcharts({
+    rateChart = $('#rate-chart').highcharts({
       colors: ['#fff'],
       // TODO: Check license
       credits: {
@@ -123,23 +225,11 @@ $(document).ready(function() {
         plotBackgroundColor: '#666'
       },
       title: {
-        text: 'Monthly Repayment'
+        text: ''
       },
       xAxis: {
-        categories: offerNames.name,
         labels: {
-          rotation: -90,
-          x: colImgX,
-          y: -43,
-          useHTML: true,
-          formatter: function() {
-            return '<img src="' + offerData[this.value].imgURL + '" height="'+colImgSize+'"/>';
-          },
-          style: {
-            color: '#000',
-            font: '10px arial',
-            marginTop: "200px"
-          }
+          enabled: false
         },
         lineWidth: 0,
         minorGridLineWidth: 0,
@@ -152,7 +242,7 @@ $(document).ready(function() {
         title: {
           text: ''
         },
-        offset: 35,
+        offset: 40,
         labels: {
           enabled: false,
           zIndex: -5,
@@ -161,7 +251,7 @@ $(document).ready(function() {
             color: '#fff'
           }
         },
-        min: ymin - 400,
+        min: ymin - 150,
         max: ymax,
         startOnTick: false,
         gridLineColor: 'transparent',
@@ -179,12 +269,10 @@ $(document).ready(function() {
         },
         threshold: 200
       },
-
       tooltip: {
         headerFormat: '',
-        pointFormat: '{point.name}: <strong>${point.y:,.0f}</strong>/month<br/>'
+        pointFormat: '{point.name}: <br/><strong>${point.y:,.0f}</strong>/month<br/>@ <strong>{point.rate}%</strong> interest'
       },
-
       series: [{
         name: "Offer",
         data: offerData

@@ -36,6 +36,22 @@ fullDataSet = [
   }]
 ];
 
+// Calculate the totals for legend
+calculateTotals = function(array, index) {
+  if ( index == 0 ) {
+    // Interest: index = 0;
+    var arr = array;
+    function add(a, b) {
+      return a + b;
+    }
+    var sum = arr.reduce(add, 0);
+    return sum;
+  } else {
+    // Principal: index = 1;
+    return array[0];
+  }
+}
+
 $(document).ready(function() {
   drawRepaymentChart = function(div, data) {
     $(div).highcharts({
@@ -65,14 +81,18 @@ $(document).ready(function() {
         xDateFormat: '%Y'
       },
       legend: {
-        align: 'left',
+        align: 'right',
         floating: true,
-        verticalAlign: 'bottom',
+        verticalAlign: 'top',
         layout: 'vertical',
-        y: 14,
+        y: 45,
+        useHTML: true,
+        labelFormatter: function() {
+            return this.name + ': <span style="font-weight:normal">$' + currency(calculateTotals(this.options.data, this.index)) + '</span>';
+        },
         itemStyle: {
-          fontWeight: 'normal',
-          fontSize: '11px'
+          fontWeight: 'bold',
+          fontSize: '14px'
         }
       },
       plotOptions: {

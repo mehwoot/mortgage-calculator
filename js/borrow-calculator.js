@@ -1,18 +1,31 @@
+var borrowChart, borrowAmountTotal;
+
 calculateTotalBorrowAmount = function() {
-  borrowAmountTotal = $('#propertyValue').val() - $('#initialSum').val() + stampDuty + random + lawyer;
+  borrowAmountTotal = $('#propertyValue').val() - $('#initialSum').val() + stampDuty + random + lawyer - homeBuyer;
+}
+
+checkNegativeValue = function(num) {
+  if ( num > 0 ) {
+    return num;
+  } else {
+    return num = 0;
+  }
 }
 
 $(document).ready(function(){
 
-  /* Set values for testing
-  $('#propertyValue').val('50000');
-  $('#initialSum').val('0');
-  $('#loanPeriod').val('10');*/
+  // Image sizes in columns
+  if ( $(window).width() < 436) {
+    borrowMargin = 100
+  } else {
+    borrowMargin = 0
+  }
 
   // Fixed variables
   stampDuty = 30000;
   random = 20000;
   lawyer = 2000;
+  homeBuyer = 0;
 
   calculateTotalBorrowAmount();
 
@@ -28,12 +41,14 @@ $(document).ready(function(){
             backgroundColor: '#f1f1f1',
             plotBackgroundColor: '#f1f1f1',
             plotBorderWidth: 0,
-            plotShadow: false
+            plotShadow: false,
+            marginRight: -borrowMargin
         },
         title: {
             align: 'center',
             verticalAlign: 'middle',
             y: 0,
+            x: (borrowMargin / 2) + 4,
             style: {
               color: '#999',
               fontSize: '15px'
@@ -66,7 +81,7 @@ $(document).ready(function(){
             name: 'Cost',
             innerSize: '65%',
             data: [
-                ['Property',   Number($('#propertyValue').val())],
+                ['Property',  checkNegativeValue(Number($('#propertyValue').val() - $('#initialSum').val() - homeBuyer)) ],
                 ['Stamp Duty',       stampDuty],
                 ['Random', random],
                 ['Lawyer',    lawyer]
@@ -76,16 +91,57 @@ $(document).ready(function(){
     borrowChart = $('#borrow-chart').highcharts();
     borrowChart.setTitle({
       text:
-        '<strong>$' + currency(borrowAmountTotal) + '</strong>' + "<br /> borrowing"
+        '<strong>$' + currency(checkNegativeValue(borrowAmountTotal)) + '</strong>' + "<br /> borrowing"
     });
   }
 
-  // Expand after completing initial sum
-  $('.chart-data input').keyup(function(){
-    calculateTotalBorrowAmount();
+  // Update the borrow amount display
+  var updateBorrowDisplay = function() {
     $('#borrow-total').html(function(){
-      return currency(borrowAmountTotal);
+      return currency(checkNegativeValue(borrowAmountTotal));
     });
+  }
+
+  // Update all values and redraw chart
+  var updateAll = function() {
+    calculateTotalBorrowAmount();
+    updateBorrowDisplay();
     drawBorrowChart();
+    setTimeout(function(){
+      $('#borrow-chart').highcharts().reflow();
+    }, 1000);
+  }
+
+  // Add FHB text
+  textAdder = function(){
+    updateAll();
+    borrowChart.renderer
+    .text('Amount borrowed<br />reduced by $15,000<br />due to First Home<br />Buyer\'s Grant', 15, 20)
+      .css({
+          color: '#333',
+          fontSize: '11px'
+      })
+      .add();
+  }
+
+  // Test if FHB is checked
+  var checkTester = function() {
+    if ($('#firstHomeBuyer').is(':checked') == true) {
+      textAdder();
+    } else {
+      updateAll();
+    };
+  }
+
+  // Redraw the chart when values are changed
+  $('.chart-data input').keyup(function(){
+    checkTester();
   });
+
+  $('#firstHomeBuyer').change(function(){
+    var checked = this.checked ? 15000 : 0;
+    homeBuyer = checked;
+    checkTester();
+  });
+
 });

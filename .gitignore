@@ -40,3 +40,4 @@ Thumbs.db
 node_modules/
 gulpfile.js
 bootstrap/dist
+js/plotfixer.js

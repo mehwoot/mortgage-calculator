@@ -4,10 +4,11 @@
     %title RateCity Mortgage Calculator Widget
     %meta{charset: "utf-8"}
     %meta{http-equiv: "X-UA-Compatible", content: "IE=edge"}
-    %meta{name: "viewport", content: "width=device-width, initial-scale=1"}
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"}
+    %link{rel: "stylesheet", href: "https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"}
     %link{rel: "stylesheet", href: "css/bootstrap.css"}
     %link{rel: "stylesheet", href: "css/calculator.css"}
-    %link{rel: "stylesheet", href: "https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"}
+    %link{rel: "stylesheet", href: "css/awesome-bootstrap-checkbox.css"}
     %script{src: "https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"}
     %script{src: "js/iframeResizer.contentWindow.min.js"}
 
@@ -16,98 +17,187 @@
       .calculator-container
         .row
           .col-sm-12
-            .row
-              .col-sm-12
-                %legend Mortgage Repayment Calculator
-            %form.form-horizontal
+            .section-heading
+              .icons-disc
+                .fa.fa-calculator
+              %h1
+                Mortgage Repayment Calculator
+            %hr
+
+            %form.form-horizontal.mortgage-form
               %fieldset
-                .form-group.fg-nm
-                  .col-xs-6
-                    %label.control-label{for: "propertyValue"} Property Value
-                    .input-group.chart-data
-                      %span.input-group-addon $
-                      %input#propertyValue.form-control{type: "number", placeholder: 500000, step: "10000", pattern: "^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$"}
-                  .col-xs-6
-                    %label.control-label{for: "initialSum"} I have an initial sum of
-                    .input-group.chart-data
-                      %span.input-group-addon $
-                      %input#initialSum.form-control{type: "number", placeholder: 50000, step: "10000"}
-                  .col-xs-12.borrow-extra-col.collapse
-                    %a.borrow-extra-trigger{role: "button", data-toggle: "collapse", data-target: ".borrow-extra", aria-controls: "advanced-options"}
-                      .alert.alert-info
-                        %span.fa.fa-info-circle
-                        %span &nbsp; You will need to borrow $<span id="borrow-total"></span>. Why?
-                        %span.fa.fa-angle-down.pull-right
-                  .col-xs-12.borrow-extra.collapse
-                    %div
-                      #borrow-chart{style: "height: 200px;"}
-                  .col-xs-6
-                    %label.control-label{for: "loanPeriod"} Loan Period
-                    .input-group
-                      %input#loanPeriod.form-control{type: "number", placeholder: 30, step: "1"}
-                      %span.input-group-addon years
-                  .col-xs-6
-                    %label.control-label{for: "interestRate"} Interest Rate
-                    .input-group
-                      %input#interestRate.form-control{type: "number", placeholder: 4.5, step: "0.1"}
-                      %span.input-group-addon %
-                #advanced-options.collapse
-                  .row
-                    .col-xs-12
-                      %p Advanced options go here
-                  -#
-                    .form-group
-                      .col-sm-4
-                        %label.control-label{for: "extraPayments"} Extra Payments
-                        .input-group
-                          %span.input-group-addon $
-                          %input#extraPayments.form-control{type: "number", placeholder: 100, step: "10"}
-                      .col-sm-4
-                        %label.control-label{for: "initialPayments"} Initial Monthly Payments
-                        .input-group
-                          %span.input-group-addon $
-                          %input#initialPayments.form-control{type: "number", placeholder: 1000, step: "100"}
-                      .col-sm-4
-                        %label.control-label{for: "loanType"} Loan Type
-                        %select#loanType.form-control
-                          %option Variable
-                          %option Fixed
-                          %option Introductory
-                    #intro-loan.collapse
-                      .form-group
-                        .col-sm-4.col-sm-offset-4
-                          %label.control-label{for: "introRate"} Intro Rate
-                          .input-group
-                            %input#introRate.form-control{type: "number", placeholder: 3.5, step: "0.1"}
-                            %span.input-group-addon %
-                        .col-sm-4
-                          %label.control-label{for: "introTerm"} Intro Term
-                          .input-group
-                            %input#introTerm.form-control{type: "number", placeholder: 24, step: "1"}
-                            %span.input-group-addon months
-                .row
-                  .col-sm-4
-                    %a{role: "button", data-toggle: "collapse", data-target: "#advanced-options", aria-controls: "advanced-options"}
-                      Advanced Options&nbsp;
-                      %span.fa.fa-caret-down
-                .row
-                  .col-sm-4.col-sm-offset-4.col-xs-8.col-xs-offset-2
-                    %a#results-button.btn.btn-primary.btn-lg.btn-block.adddisabled{role: "button", aria-controls: "your-results"}
-                      Calculate Now
-                #your-results.collapse
+
+                .row.row-mb
+                  .col-xs-12
+                    .section-heading
+                      %h4
+                        .fa.fa-user
+                        Your Details
+                  .col-sm-6.col-xs-12
+                    %label.control-label{for: "mortgageReason"} I am
+                    %select#mortgageReason.form-control
+                      %option Select a reason
+                      %option Buying a property
+                      %option Refinancing
+                  .col-sm-6.col-xs-12
+                    .refinancing-holder.collapse.fade
+                      %label.control-label{for: "goingTo"} I am going to
+                      %select#goingTo.form-control
+                        %option Live in the property
+                        %option Rent the property
+
+                .refinancing-holder.collapse.fade
                   .row
                     .col-sm-12
-                      %legend Your repayment outlook
+                      .section-heading
+                        %h4
+                          .fa.fa-dollar
+                          Loan Details
+                  .form-group
+                    .col-sm-3.col-xs-6
+                      %label.control-label{for: "interestRateRF"} Interest Rate
+                      .input-group
+                        %input#interestRateRF.form-control{type: "number", step: "0.1"}
+                        %span.input-group-addon %
+                    .col-sm-3.col-xs-6
+                      %label.control-label{for: "loanPeriodRF"} Loan Period
+                      .input-group
+                        %input#loanPeriodRF.form-control{type: "number", step: "1"}
+                        %span.input-group-addon years
+                    .col-sm-6.col-xs-12
+                      %label.control-label{for: "loanStructureRF"} Loan Structure
+                      %select#loanStructureRF.form-control
+                        %option Principal & interest
+                        %option Interest only
+                    .col-sm-6.col-xs-12
+                      %label.control-label{for: "borrowAmountRF"} I want to borrow
+                      .input-group.chart-data
+                        %span.input-group-addon $
+                        %input#borrowAmountRF.form-control{type: "number", step: "10000", pattern: "^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$", required: true}
+                  .row.row-mb
+                    .col-sm-4.col-xs-12.visible-xs
+                      .rf-form-errors-rf
+                    .col-sm-4.col-sm-offset-4.col-xs-8.col-xs-offset-2
+                      %a#refinancing-results-button.btn.btn-primary.btn-lg.btn-block{role: "button", aria-controls: "your-results"}
+                        Calculate Now
+                    .col-sm-4.col-xs-12.hidden-xs
+                      .rf-form-errors-rf
+
+                .homebuyer-holder.collapse.fade
+                  .form-group
+                    .col-xs-6
+                      %label.control-label{for: "initialSum"}
+                        .hidden-xs
+                          I have an initial sum of
+                        .visible-xs
+                          My initial sum is
+                      .input-group.chart-data
+                        %span.input-group-addon $
+                        %input#initialSum.form-control{type: "number", step: "10000"}
+                    .col-xs-6
+                      %label.control-label{for: "goingTo"} I am going to
+                      %select#goingTo.form-control
+                        %option Live in the property
+                        %option Rent the property
+                  .form-group
+                    .col-xs-12
+                      .checkbox.checkbox-primary
+                        %input#firstHomeBuyer{type: "checkbox", name: "firstHomeBuyer", value: "firstHomeBuyer"}
+                        %label{for: "firstHomeBuyer"}
+                          I am a first home buyer
+                  .row
+                    .col-sm-12
+                      .section-heading
+                        %h4
+                          .fa.fa-home
+                          Property Details
+                  .form-group.fg-nm
+                    .col-sm-6.col-xs-12
+                      %label.control-label{for: "State"} State
+                      %select#State.form-control
+                        %option New South Wales
+                        %option Queensland
+                        %option Victoria
+                        %option South Australia
+                        %option Western Australia
+                        %option Northern Territories
+                        %option Tasmania
+                    .col-xs-6
+                      %label.control-label{for: "propertyType"} Property Type
+                      %select#propertyType.form-control
+                        %option Existing property
+                        %option Off the plan / Newly contructed
+                        %option Land only
+                    .col-xs-6
+                      %label.control-label{for: "propertyValue"} Property Value
+                      .input-group.chart-data
+                        %span.input-group-addon $
+                        %input#propertyValue.form-control{type: "number", step: "10000", pattern: "^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$", required: true}
+                    .col-xs-12.borrow-extra-col.collapse
+                      %a.borrow-extra-trigger{role: "button", data-toggle: "collapse", data-target: ".borrow-extra", aria-controls: "borrow-extra"}
+                        .alert.alert-info
+                          %span.fa.fa-info-circle
+                          %span &nbsp; You will need to borrow $<span id="borrow-total"></span>. Why?
+                          %span.fa.fa-angle-down.pull-right
+                    .col-xs-12.borrow-extra.collapse
+                      %div
+                        #borrow-chart{style: "height: 200px;"}
+                  .row
+                    .col-sm-12
+                      .section-heading
+                        %h4
+                          .fa.fa-dollar
+                          Loan Details
+                  .form-group
+                    .col-sm-3.col-xs-6
+                      %label.control-label{for: "interestRate"} Interest Rate
+                      .input-group
+                        %input#interestRate.form-control{type: "number", step: "0.1"}
+                        %span.input-group-addon %
+                    .col-sm-3.col-xs-6
+                      %label.control-label{for: "loanPeriod"} Loan Period
+                      .input-group
+                        %input#loanPeriod.form-control{type: "number", step: "1"}
+                        %span.input-group-addon years
+                    .col-sm-6.col-xs-12
+                      %label.control-label{for: "loanStructure"} Loan Structure
+                      %select#loanStructure.form-control
+                        %option Principal & interest
+                        %option Interest only
+
+                  .row.row-mb
+                    .col-sm-4.col-xs-12.visible-xs
+                      .rf-form-errors-hb
+                    .col-sm-4.col-sm-offset-4.col-xs-8.col-xs-offset-2
+                      %a#homebuyer-results-button.btn.btn-primary.btn-lg.btn-block{role: "button", aria-controls: "your-results"}
+                        Calculate Now
+                    .col-sm-4.col-xs-12.hidden-xs
+                      .rf-form-errors-hb
+
+                #your-results.collapse
+                  .row.row-mb
+                    .col-sm-12
+                      %hr
+                      .section-heading
+                        .icons-disc
+                          .fa.fa-refresh
+                        %h2
+                          Monthly repayments
+                      .text-big
+                        Based on the interest rate of <span id="interest-rate"></span><span id="interest-rateRF"></span>% and other details you provided, your monthly repayments are&nbsp;
+                        %span.styled-value $1756
                   .row
                     .col-sm-12
                       .chart-holder{style: "max-width:100%;"}
                         #rate-chart{style: "height: 300px;"}
+
                   .row.row-5ths.row-mb
                     .col-xs-5ths{data-offer: "0"}
                     .col-xs-5ths{data-offer: "1"}
                     .col-xs-5ths{data-offer: "2"}
                     .col-xs-5ths{data-offer: "3"}
                     .col-xs-5ths{data-offer: "4"}
+
                   .row.row-5ths.graph-tabs
                     .col-xs-5ths.text-center
                         %li.graph-tab{role: "presentation"}
@@ -154,77 +244,8 @@
                         #graph-4.tab-pane.in{role: "tabpanel"}
                           .repayment-chart{style: "height: 300px;"}
 
-                  .row
-                    .col-sm-12
-                      %a.btn.btn-default.btn-block{role: "button", data-toggle: "collapse", data-target: "#amort-table", aria-controls: "amortisation-table", style: "margin-bottom: 12px;"}
-                        View amortisation table
-                  #amort-table.collapse
-                    .row
-                      .col-sm-12
-                        %table.table.table-condensed.table-striped.table-bordered.table-amort
-                          %tbody
-                            %tr
-                              %th Years
-                              %th Interest p/a
-                              %th Principal
-                              %th Owing
-                            %tr
-                              %td 0
-                              %td $100,000
-                              %td $1,000,000
-                              %td $1,000,000
-                            %tr
-                              %td 1
-                              %td $00,000
-                              %td $000,000
-                              %td $000,000
-                            %tr
-                              %td 2
-                              %td $00,000
-                              %td $000,000
-                              %td $000,000
-                            %tr
-                              %td 3
-                              %td $00,000
-                              %td $000,000
-                              %td $000,000
-                            %tr
-                              %td 4
-                              %td $00,000
-                              %td $000,000
-                              %td $000,000
-                            %tr
-                              %td 5
-                              %td $00,000
-                              %td $000,000
-                              %td $000,000
-                            %tr
-                              %td 6
-                              %td $00,000
-                              %td $000,000
-                              %td $000,000
-                            %tr
-                              %td 7
-                              %td $00,000
-                              %td $000,000
-                              %td $000,000
-                            %tr
-                              %td 8
-                              %td $00,000
-                              %td $000,000
-                              %td $000,000
-                            %tr
-                              %td 9
-                              %td $00,000
-                              %td $000,000
-                              %td $000,000
-                            %tr
-                              %td 10
-                              %td $00,000
-                              %td $000,000
-                              %td $000,000
 
-        .row{style: "margin-top: 12px;"}
+        .row
           .col-xs-6.fine-print
             %small
               %a{tabindex: "0", role: "button", data-toggle: "popover", data-trigger: "focus", data-placement: "top", title: "This is the disclaimer", data-content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel optio voluptatibus blanditiis pariatur quo impedit ducimus rem necessitatibus, ab dignissimos aspernatur molestiae quae harum minima expedita nisi, sed officia ipsa."} Disclaimer
@@ -236,4 +257,6 @@
     %script{src: "js/rate-chart.js"}
     %script{src: "js/repayment-calculator.js"}
     %script{src: "js/calculator.js"}
+    %script{src: "js/happy.js"}
     %script{src: "http://code.highcharts.com/highcharts.js"}
+    %script{src: "http://fast.fonts.net/jsapi/12325033-2c58-4617-8cfd-a71d853a987f.js"}
