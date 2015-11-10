@@ -62,6 +62,9 @@ a.borrow-extra-trigger .alert {
 .borrow-extra div {
   background: #f1f1f1; }
 
+.lvr-display span {
+  padding-top: 12px; }
+
 .unhappy {
   border-color: #F50000;
   box-shadow: 0 0 5px rgba(255, 0, 0, 0.45); }

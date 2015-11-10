@@ -1,10 +1,33 @@
 var borrowChart, borrowAmountTotal;
 
-calculateTotalBorrowAmount = function() {
-  borrowAmountTotal = $('#propertyValue').val() - $('#initialSum').val() + stampDuty + random + lawyer - homeBuyer;
+function calculateTotalBorrowAmount() {
+  borrowAmountTotal = $('#propertyValue').val() - $('#initialSum').val() + stampDuty + random - homeBuyer;
 }
 
-checkNegativeValue = function(num) {
+function calculateLVR(){
+  lvrValue = checkNegativeValue((($('#propertyValue').val() - $('#initialSum').val()) / $('#propertyValue').val() * 100).toFixed(2));
+}
+
+function addMortgageIns(){
+  borrowAmountTotalMII = +borrowAmountTotal + +mortgageInsurance;
+  console.log(borrowAmountTotalMII);
+}
+
+function calculateMortgageIns(){
+  mortgageInsurance = 0;
+  if (lvrValue > 81.01 && lvrValue < 86 ) {
+    mortgageInsurance = (borrowAmountTotal * 0.85/100).toFixed(0);
+  } else if (lvrValue > 86.01 && lvrValue < 92 ) {
+    mortgageInsurance = (borrowAmountTotal * 1.94/100).toFixed(0);
+  } else if (lvrValue > 92.01 && lvrValue <= 100 ) {
+    mortgageInsurance = (borrowAmountTotal * 3.3/100).toFixed(0);
+  } else {
+    mortgageInsurance = 0;
+  }
+  console.log(mortgageInsurance);
+}
+
+function checkNegativeValue(num) {
   if ( num > 0 ) {
     return num;
   } else {
@@ -13,7 +36,6 @@ checkNegativeValue = function(num) {
 }
 
 $(document).ready(function(){
-
   // Image sizes in columns
   if ( $(window).width() < 436) {
     borrowMargin = 100
@@ -24,15 +46,15 @@ $(document).ready(function(){
   // Fixed variables
   stampDuty = 30000;
   random = 20000;
-  lawyer = 2000;
   homeBuyer = 0;
+  mortgageInsurance = 0;
 
   calculateTotalBorrowAmount();
 
   // Draw the chart
   drawBorrowChart = function() {
     $('#borrow-chart').highcharts({
-        colors: ['#1AAC41', '#FC903D', '#FED030', '#999', '#60C0DC'],
+        colors: ['#1AAC41', '#FC903D', '#FED030', '#60C0DC', '#999'],
         // TODO: Check license
         credits: {
           enabled: false
@@ -58,9 +80,12 @@ $(document).ready(function(){
           floating: true,
           layout: "vertical",
           align: "left",
+          y: 15,
+          x: -2,
+          itemMarginTop: 3,
           useHTML: true,
           labelFormatter: function() {
-              return this.name + ': <span style="font-weight:normal">$' + currency(this.y) + '</span>';
+              return '<span style="font-weight:normal">' + this.name + ':</span><br/>$' + currency(this.y);
 				  }
         },
         tooltip: {
@@ -70,10 +95,17 @@ $(document).ready(function(){
             pie: {
               size: '100%',
               showInLegend: true,
-                dataLabels: {
-                    enabled: false
+              dataLabels: {
+                  enabled: false
 
+              },
+              point: {
+                events: {
+                  legendItemClick: function () {
+                    return false;
+                  }
                 }
+              }
             }
         },
         series: [{
@@ -81,30 +113,43 @@ $(document).ready(function(){
             name: 'Cost',
             innerSize: '65%',
             data: [
-                ['Property',  checkNegativeValue(Number($('#propertyValue').val() - $('#initialSum').val() - homeBuyer)) ],
-                ['Stamp Duty',       stampDuty],
+                ['Property', checkNegativeValue(Number($('#propertyValue').val() - $('#initialSum').val() - homeBuyer)) ],
+                ['Stamp Duty', stampDuty],
                 ['Random', random],
-                ['Lawyer',    lawyer]
+                ['Mortgage Insurance', checkNegativeValue(+mortgageInsurance)]
             ]
         }]
     });
     borrowChart = $('#borrow-chart').highcharts();
     borrowChart.setTitle({
       text:
-        '<strong>$' + currency(checkNegativeValue(borrowAmountTotal)) + '</strong>' + "<br /> borrowing"
+        '<strong>$' + currency(checkNegativeValue(borrowAmountTotalMII)) + '</strong>' + "<br /> borrowing"
     });
   }
 
   // Update the borrow amount display
   var updateBorrowDisplay = function() {
     $('#borrow-total').html(function(){
-      return currency(checkNegativeValue(borrowAmountTotal));
+      return currency(checkNegativeValue(borrowAmountTotalMII));
     });
   }
+
+  // Show LVR
+  $('#propertyValue, #initialSum').keyup(function(){
+    calculateLVR();
+    if (lvrValue > 80) {
+      $('.lvr-value').text(lvrValue);
+      $('.lvr-display').collapse('show');
+    } else {
+      $('.lvr-display').collapse('hide');
+    }
+  });
 
   // Update all values and redraw chart
   var updateAll = function() {
     calculateTotalBorrowAmount();
+    calculateMortgageIns();
+    addMortgageIns();
     updateBorrowDisplay();
     drawBorrowChart();
     setTimeout(function(){
@@ -116,7 +161,7 @@ $(document).ready(function(){
   textAdder = function(){
     updateAll();
     borrowChart.renderer
-    .text('Amount borrowed<br />reduced by $15,000<br />due to First Home<br />Buyer\'s Grant', 15, 20)
+    .text('Amount borrowed<br />reduced by $15,000<br />due to First Home<br />Buyer\'s Grant', 15, 15)
       .css({
           color: '#333',
           fontSize: '11px'

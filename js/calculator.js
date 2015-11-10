@@ -32,9 +32,13 @@ $(document).ready(function(){
     if ($(this).val() == "Buying a property") {
       $(".refinancing-holder").collapse('hide');
       $(".homebuyer-holder").collapse('show');
+      $("#iam-results-button").hide();
+      $('.iam-form-errors').remove();
     } else if ($(this).val() == "Refinancing") {
       $(".homebuyer-holder").collapse('hide');
       $(".refinancing-holder").collapse('show');
+      $("#iam-results-button").hide();
+      $('.iam-form-errors').remove();
     }
   });
 
@@ -47,6 +51,11 @@ $(document).ready(function(){
     setTimeout(function () {
         $(window).trigger('resize');
     }, 1);
+  });
+
+  // Show error to prompt user to select a reason
+  $('#iam-results-button').click(function(e){
+    $('.iam-form-errors').html('<div class="alert alert-danger">Please select a mortgage reason.</div>');
   });
 
   // Form validation

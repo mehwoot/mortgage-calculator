@@ -1,54 +1,72 @@
 offerData = [{
   name: "SocietyOne",
-  y: 1650,
+  repayment: 1650,
   imgURL: "http://cdn.ratecity.com.au/companies/logo/sban/small_sban_logo.jpg",
   URL: "#",
-  rate: '4'
+  comparison_rate: '4',
+  advertised_rate: '3.99'
 }, {
   name: "HSBC",
-  y: 1689,
+  repayment: 1689,
   imgURL: "http://cdn.ratecity.com.au/companies/logo/lcom/small_lcom_logo.png",
   URL: "#",
-  rate: '5'
+  comparison_rate: '4',
+  advertised_rate: '3.99'
 }, {
   name: "RACV",
-  y: 1733,
+  repayment: 1733,
   imgURL: "http://cdn.ratecity.com.au/companies/logo/moa/small_moa_logo.png",
   URL: "#",
-  rate: '6'
+  comparison_rate: '4',
+  advertised_rate: '3.99'
   }, {
   name: "You",
-  y: 1756,
+  repayment: 1756,
   imgURL: "https://raw.githubusercontent.com/ratecity/mortgage-calculator/gh-pages/img/youman.png",
   URL: "#",
-  rate: '7'
+  comparison_rate: '4',
+  advertised_rate: '3.99'
 }, {
   name: "Bank of Melbourne",
-  y: 1797,
+  repayment: 1797,
   imgURL: "http://cdn.ratecity.com.au/companies/logo/cua/small_cua_logo.jpg",
   URL: "#",
-  rate: '8'
+  comparison_rate: '4',
+  advertised_rate: '3.99'
 }]
 
+offerDataFormatted = [];
+
+for (var i = 0; i < offerData.length; i++) {
+  offerDataFormatted.push({
+    name: offerData[i].name,
+    y: offerData[i].repayment,
+    URL: offerData[i].URL,
+    imgURL: offerData[i].imgURL,
+    compRate: offerData[i].comparison_rate,
+    adRate: offerData[i].advertised_rate
+  });
+}
+
 // Sort data into ascending order
-offerData.sort(function(a, b) {
+offerDataFormatted.sort(function(a, b) {
   return parseFloat(a.y) - parseFloat(b.y);
 });
 
 // Generate min and max values for rate graph
-ymin = Math.min.apply(Math, offerData.map(function(o) {
+ymin = Math.min.apply(Math, offerDataFormatted.map(function(o) {
   return o.y;
 }));
-ymax = Math.max.apply(Math, offerData.map(function(o) {
+ymax = Math.max.apply(Math, offerDataFormatted.map(function(o) {
   return o.y;
 }));
 
 // Generate and style plotlines
 var plotLines = [];
-for (var i = 0; i < offerData.length; i++) {
-  if (offerData[i] == offerData[0]) {
+for (var i = 0; i < offerDataFormatted.length; i++) {
+  if (offerDataFormatted[i] == offerDataFormatted[0]) {
     plotLines.push({
-      value: offerData[i].y,
+      value: offerDataFormatted[i].y,
       color: '#F98F40',
       bgColor: '#F98F40',
       textColor: '#fff',
@@ -58,9 +76,9 @@ for (var i = 0; i < offerData.length; i++) {
       paddingBottom: '1px',
       borderRadius: '3px'
     })
-  } else if (offerData[i].name == "You") {
+  } else if (offerDataFormatted[i].name == "You") {
     plotLines.push({
-      value: offerData[i].y,
+      value: offerDataFormatted[i].y,
       color: '#60C1DC',
       bgColor: '#60C1DC',
       textColor: '#fff',
@@ -72,7 +90,7 @@ for (var i = 0; i < offerData.length; i++) {
     })
   } else {
     plotLines.push({
-      value: offerData[i].y,
+      value: offerDataFormatted[i].y,
       color: '#aaa',
       bgColor: 'transparent',
       textColor: '#777',
@@ -119,7 +137,7 @@ function removeCollision() {
 
 // Run for each plotline
 function runCollision(){
-  for (var i = 0; i < offerData.length; i++) {
+  for (var i = 0; i < offerDataFormatted.length; i++) {
     removeCollision();
   }
 }
@@ -155,7 +173,7 @@ function drawPlotLines() {
 // Offer badges
 function addOfferBadge(name, img, imgWidth, index) {
   if ( name == "You" ) {
-    findYouIndex = offerData.findIndex(function (element) {
+    findYouIndex = offerDataFormatted.findIndex(function (element) {
         return element.name === "You";
     });
     index = findYouIndex + 1;
@@ -189,9 +207,9 @@ function addBarIcon(index, img) {
 
 // Create the offer buttons
 function createOfferButtons(){
-  for (var i = 0; i < offerData.length; i++) {
-    $('*[data-offer="'+i+'"]').empty().prepend('<a href="' + offerData[i].URL + '" class="btn btn-primary btn-sm btn-rate-graph">View<br/>Offer</a>');
-    if ( offerData[i].name == "You") {
+  for (var i = 0; i < offerDataFormatted.length; i++) {
+    $('*[data-offer="'+i+'"]').empty().prepend('<a href="' + offerDataFormatted[i].URL + '" class="btn btn-primary btn-sm btn-rate-graph">View<br/>Offer</a>');
+    if ( offerDataFormatted[i].name == "You") {
       $('*[data-offer="'+i+'"]').empty().append('<strong class="text-center btn-rate-graph" style="color: #777;font-size: 13px;font-family:Proxima N W01 At Bold;">YOU</strong>');
     }
   }
@@ -208,8 +226,8 @@ $(document).ready(function() {
   }
 
   generateBarIcons = function(){
-    for (var i = 0; i < offerData.length; i++ ) {
-      addBarIcon(i, offerData[i].imgURL);
+    for (var i = 0; i < offerDataFormatted.length; i++ ) {
+      addBarIcon(i, offerDataFormatted[i].imgURL);
     }
   }
 
@@ -271,11 +289,11 @@ $(document).ready(function() {
       },
       tooltip: {
         headerFormat: '',
-        pointFormat: '{point.name}: <br/><strong>${point.y:,.0f}</strong>/month<br/>@ <strong>{point.rate}%</strong> interest'
+        pointFormat: '{point.name}: <br/><strong>${point.y:,.0f}</strong>/month<br/>@ <strong>{point.compRate}%</strong> interest'
       },
       series: [{
         name: "Offer",
-        data: offerData
+        data: offerDataFormatted
       }]
     });
   }
