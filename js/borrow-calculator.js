@@ -10,7 +10,6 @@ function calculateLVR(){
 
 function addMortgageIns(){
   borrowAmountTotalMII = +borrowAmountTotal + +mortgageInsurance;
-  console.log(borrowAmountTotalMII);
 }
 
 function calculateMortgageIns(){
@@ -24,7 +23,6 @@ function calculateMortgageIns(){
   } else {
     mortgageInsurance = 0;
   }
-  console.log(mortgageInsurance);
 }
 
 function checkNegativeValue(num) {
@@ -80,7 +78,7 @@ $(document).ready(function(){
           floating: true,
           layout: "vertical",
           align: "left",
-          y: 15,
+          y: 10,
           x: -2,
           itemMarginTop: 3,
           useHTML: true,
@@ -137,12 +135,13 @@ $(document).ready(function(){
   // Show LVR
   $('#propertyValue, #initialSum').keyup(function(){
     calculateLVR();
-    if (lvrValue > 80) {
+    // Maybe for 1.1
+    /*if (lvrValue > 80) {
       $('.lvr-value').text(lvrValue);
       $('.lvr-display').collapse('show');
     } else {
       $('.lvr-display').collapse('hide');
-    }
+    }*/
   });
 
   // Update all values and redraw chart
@@ -161,7 +160,7 @@ $(document).ready(function(){
   textAdder = function(){
     updateAll();
     borrowChart.renderer
-    .text('Amount borrowed<br />reduced by $15,000<br />due to First Home<br />Buyer\'s Grant', 15, 15)
+    .text('Amount borrowed<br />reduced by $15,000<br />due to First Home<br />Buyer\'s Grant', 15, 20)
       .css({
           color: '#333',
           fontSize: '11px'

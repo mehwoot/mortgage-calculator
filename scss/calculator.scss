@@ -57,14 +57,20 @@ a.borrow-extra-trigger {
   }
 }
 
-.borrow-extra div {
-  background: #f1f1f1;
+.alert-default {
+  border-width: 1px 0 0 0;
+  margin-bottom: 0;
 }
 
 .lvr-display {
   span {
     padding-top: 12px;
   }
+}
+
+.term-meanings {
+  background: #f1f1f1;
+  color: #555;
 }
 
 // Form validation

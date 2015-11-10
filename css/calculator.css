@@ -59,11 +59,16 @@ a.borrow-extra-trigger .alert {
   margin-top: 12px;
   margin-bottom: 0; }
 
-.borrow-extra div {
-  background: #f1f1f1; }
+.alert-default {
+  border-width: 1px 0 0 0;
+  margin-bottom: 0; }
 
 .lvr-display span {
   padding-top: 12px; }
+
+.term-meanings {
+  background: #f1f1f1;
+  color: #555; }
 
 .unhappy {
   border-color: #F50000;

@@ -140,10 +140,11 @@
                       .input-group.chart-data
                         %span.input-group-addon $
                         %input#propertyValue.form-control{type: "number", step: "10000", pattern: "^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$", required: true, min: "0"}
-                    .col-xs-6.lvr-display.collapse.fade
-                      %label &nbsp;
-                      %span.input-group
-                        Your <abbr data-toggle="tooltip" data-placement="top" title="Loan to Valuation Ratio">LVR</abbr> is <span class="lvr-value"></span>%
+                    -# Maybe for 1.1
+                      .col-xs-6.lvr-display.collapse.fade
+                        %label &nbsp;
+                        %span.input-group
+                          Your <abbr data-toggle="tooltip" data-placement="top" title="Loan to Valuation Ratio">LVR</abbr> is <span class="lvr-value"></span>%
                     .col-xs-12.borrow-extra-col.collapse
                       %a.borrow-extra-trigger{role: "button", data-toggle: "collapse", data-target: ".borrow-extra", aria-controls: "borrow-extra"}
                         .alert.alert-info
@@ -152,7 +153,25 @@
                           %span.fa.fa-angle-down.pull-right
                     .col-xs-12.borrow-extra.collapse
                       %div
-                        #borrow-chart{style: "height: 200px;"}
+                        #borrow-chart{style: "height: 215px;"}
+                        .row
+                          .col-xs-12
+                            %a.term-meanings-trigger{role: "button", data-toggle: "collapse", data-target: ".term-meanings", aria-controls: "borrow-extra"}
+                              .alert.alert-default
+                                %span.fa.fa-info-circle
+                                %span
+                                  %strong &nbsp; What are these costs?
+                                %span.fa.fa-angle-down.pull-right
+                            .col-xs-12.term-meanings.collapse
+                              %div
+                                %p
+                                  <strong>Property</strong> is the amount you will need to borrow to cover the cost of the property that you wish to purchase.
+                                %p
+                                  <strong>Stamp duty</strong> is a tax on written documents. It is imposed by state and territory governments. It can vary depending on the state or territory.
+                                %p
+                                  <strong>Random costs</strong> include things such as lawyers, hiring movers and other miscellaneous costs that may incur.
+                                %p
+                                  Lender's <strong>Mortgage Insurance</strong> (LMI) is generally charged to all borrowers with an Loan to Value Ratio (LVR) over 80%. This is also known as having less than 20% deposit or equity. Don't forget - it protects the lender, not the borrower so if things go south, you'll still need to repay the loan.
                   .row
                     .col-sm-12
                       .section-heading
