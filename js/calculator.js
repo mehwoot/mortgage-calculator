@@ -73,11 +73,27 @@ $(document).ready(function(){
     },
     submitButton: $('#refinancing-results-button'),
     happy: function(){
-      $('.rf-form-errors-rf').empty();
-      runResults();
+      $('.rf-form-errors').empty();
+
+      $.ajax({
+        method: "POST",
+        url: "http://staging.ratecity.com.au/api/v1/home_loans_calculator_feed",
+        data: {
+          amount: borrowAmountTotal,
+          term: $('#loanPeriodRF').val(),
+          rate: $('#interestRateRF').val(),
+          purpose: $('#goingToRF option:selected').data('value')
+        }
+      }).done(function(results){
+        plotLines.length = 0;
+        offerDataFormatted.length = 0;
+        offerData = results.offerData;
+        allOfferFunctions();
+        runResults();
+      });
     },
     unHappy: function() {
-      $('.rf-form-errors-rf').html('<div class="alert alert-danger">Enter all information.</div>');
+      $('.rf-form-errors').html('<div class="alert alert-danger">Enter all information.</div>');
     }
   });
 
@@ -98,13 +114,44 @@ $(document).ready(function(){
     },
     submitButton: $('#homebuyer-results-button'),
     happy: function(){
-      $('.rf-form-errors-hb').empty();
-      runResults();
+      $('.hb-form-errors').empty();
+
+      $.ajax({
+        method: "POST",
+        url: "http://ratecity.com.au/api/v1/home_loans_calculator_feed",
+        data: {
+          amount: borrowAmountTotal,
+          term: $('#loanPeriod').val(),
+          rate: $('#interestRate').val(),
+          purpose: $('#goingTo option:selected').data('value')
+        }
+      }).done(function(results){
+        plotLines.length = 0;
+        offerDataFormatted.length = 0;
+        offerData = results.offerData;
+        allOfferFunctions();
+        runResults();
+      });
     },
     unHappy: function() {
-      $('.rf-form-errors-hb').html('<div class="alert alert-danger">Enter all information.</div>');
+      $('.hb-form-errors').html('<div class="alert alert-danger">Enter all information.</div>');
     }
   });
+
+  // Spinner
+  var $loading = $('.spinner').hide();
+  //Attach the event handler to any element
+  $(document)
+    .ajaxStart(function() {
+      //ajax request went so show the loading image
+      $('#refinancing-results-button, #homebuyer-results-button').addClass('disabled');
+      $loading.show();
+    })
+    .ajaxStop(function() {
+      //got response so hide the loading image
+      $('#refinancing-results-button, #homebuyer-results-button').removeClass('disabled');
+      $loading.hide();
+    });
 
   // Generate results
   function runResults() {
@@ -117,8 +164,8 @@ $(document).ready(function(){
     generateGraphs();
     setTimeout(function(){
       generateBarIcons();
-      addOfferBadge("First", 'https://raw.githubusercontent.com/ratecity/mortgage-calculator/gh-pages/img/bestoffer.png', 45, 1);
-      addOfferBadge("You", 'https://raw.githubusercontent.com/ratecity/mortgage-calculator/gh-pages/img/youroffer.png', 45);
+      addOfferBadge("First", $('#lowerOffer').data('url'), 45, 1);
+      addOfferBadge("You", $('#yourOffer').data('url'), 45);
       runCollision();
     }, 1000);
   }

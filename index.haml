@@ -12,7 +12,6 @@
     %script{src: "https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"}
     %script{src: "js/iframeResizer.contentWindow.min.js"}
 
-  %body
     .container
       .calculator-container
         .row
@@ -40,8 +39,8 @@
                       %option Refinancing
                   .col-sm-6.col-xs-12
                     .refinancing-holder.collapse.fade
-                      %label.control-label{for: "goingTo"} I am going to
-                      %select#goingTo.form-control
+                      %label.control-label{for: "goingToRF"} I am going to
+                      %select#goingToRF.form-control
                         %option Live in the property
                         %option Rent the property
                 .row.row-mb
@@ -83,12 +82,14 @@
                         %input#borrowAmountRF.form-control{type: "number", step: "10000", pattern: "^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$", required: true, min: "0"}
                   .row.row-mb
                     .col-sm-4.col-xs-12.visible-xs
-                      .rf-form-errors-rf
+                      .rf-form-errors
                     .col-sm-4.col-sm-offset-4.col-xs-8.col-xs-offset-2
                       %a#refinancing-results-button.btn.btn-primary.btn-lg.btn-block{role: "button", aria-controls: "your-results"}
-                        Calculate Now
+                        .spinner
+                          %i.fa.fa-gear.fa-spin
+                        &nbsp;Calculate Now
                     .col-sm-4.col-xs-12.hidden-xs
-                      .rf-form-errors-rf
+                      .rf-form-errors
 
                 .homebuyer-holder.collapse.fade
                   .form-group
@@ -104,8 +105,8 @@
                     .col-xs-6
                       %label.control-label{for: "goingTo"} I am going to
                       %select#goingTo.form-control
-                        %option Live in the property
-                        %option Rent the property
+                        %option{data-value: "residential_purpose"} Live in the property
+                        %option{data-value: "investment_purpose"} Rent the property
                   .form-group
                     .col-xs-12
                       .checkbox.checkbox-primary
@@ -197,12 +198,14 @@
 
                   .row.row-mb
                     .col-sm-4.col-xs-12.visible-xs
-                      .rf-form-errors-hb
+                      .hb-form-errors
                     .col-sm-4.col-sm-offset-4.col-xs-8.col-xs-offset-2
                       %a#homebuyer-results-button.btn.btn-primary.btn-lg.btn-block{role: "button", aria-controls: "your-results"}
-                        Calculate Now
+                        .spinner
+                          %i.fa.fa-gear.fa-spin
+                        &nbsp;Calculate Now
                     .col-sm-4.col-xs-12.hidden-xs
-                      .rf-form-errors-hb
+                      .hb-form-errors
 
                 #your-results.collapse
                   .row.row-mb
@@ -215,7 +218,7 @@
                           Monthly repayments
                       .text-big
                         Based on the interest rate of <span id="interest-rate"></span><span id="interest-rateRF"></span>% and other details you provided, your monthly repayments are&nbsp;
-                        %span.styled-value $1756
+                        %span.styled-value 
                   .row
                     .col-sm-12
                       .chart-holder{style: "max-width:100%;"}
@@ -294,6 +297,9 @@
             This is an information service. By browsing on the website and/or using our search tools, you are asking RateCity to provide you with information about products from multiple financial institutions. We will try to show you a range of products in response to your request for information. Offers selected from a range of home loan products in the RateCity database. The results do not include all providers and may not compare all features relevant to you, for further details refer to our <a href="http://www.ratecity.com.au/fscg">FSCG</a>. We not a credit provider, and in giving you product information we are not making any suggestion or recommendation to you about a particular credit product. If you decide to apply for a product, you will deal directly with a financial institution, and not with RateCity. Rates and product information should be confirmed with the relevant financial institution, and you should review the PDS before you decide to purchase. See our terms of use for further details. All numbers are estimates. Check exact details of offers before applying for a loan. This advice is general and has not taken into account your objectives, financial situation or needs. Consider whether this advice is right for you.
           .modal-footer
             %button.btn.btn-primary{data-dismiss: "modal", type: "button"} Close
+
+#lowerOffer{style: "display: none;", data-url: "https://raw.githubusercontent.com/ratecity/mortgage-calculator/gh-pages/img/bestoffer.png"}
+#yourOffer{style: "display: none;", data-url: "https://raw.githubusercontent.com/ratecity/mortgage-calculator/gh-pages/img/youroffer.png"}
 
     %script{src: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"}
     %script{src: "js/borrow-calculator.js"}

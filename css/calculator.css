@@ -18,6 +18,9 @@ hr {
   margin: 0;
   border-color: #e6e6e6; }
 
+strong {
+  font-family: "Proxima N W01 At Bold"; }
+
 span.amount {
   font-size: 20px; }
 
@@ -70,11 +73,14 @@ a.borrow-extra-trigger .alert {
   background: #f1f1f1;
   color: #555; }
 
+.spinner {
+  display: inline; }
+
 .unhappy {
   border-color: #F50000;
   box-shadow: 0 0 5px rgba(255, 0, 0, 0.45); }
 
-.rf-form-errors-rf .alert, .rf-form-errors-hb .alert {
+.rf-form-errors .alert, .hb-form-errors .alert {
   padding: 3px 10px;
   border-radius: 5px; }
 
