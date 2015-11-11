@@ -9,6 +9,11 @@ function currency(number) {
   return dollars;
 }
 
+function displayMonthlyRepayment(){
+  getMonthlyRepayment();
+  $('span.styled-value').text('$' + Number(monthlyRepayment).toFixed(0));
+}
+
 $(document).ready(function(){
 
   Highcharts.setOptions({ lang: {thousandsSep: ',' } });
@@ -162,6 +167,7 @@ $(document).ready(function(){
     createOfferButtons();
     drawRepaymentChart('#graph-3 .repayment-chart', fullDataSet[3]);
     generateGraphs();
+    displayMonthlyRepayment();
     setTimeout(function(){
       generateBarIcons();
       addOfferBadge("First", $('#lowerOffer').data('url'), 45, 1);

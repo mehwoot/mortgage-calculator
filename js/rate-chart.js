@@ -38,6 +38,7 @@
 offerData = [];
 plotLines = [];
 offerDataFormatted = [];
+//var monthlyRepayment;
 
 function allOfferFunctions(){
   for (var i = 0; i < offerData.length; i++) {
@@ -173,6 +174,14 @@ function allOfferFunctions(){
         }
       });
     });
+  }
+
+  function getMonthlyRepayment() {
+    for (var i = 0; i < offerDataFormatted.length; i++) {
+      if (offerDataFormatted[i].name == "You") {
+        return monthlyRepayment = offerDataFormatted[i].y;
+      }
+    }
   }
 
   // Offer badges

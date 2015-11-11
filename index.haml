@@ -80,6 +80,9 @@
                       .input-group.chart-data
                         %span.input-group-addon $
                         %input#borrowAmountRF.form-control{type: "number", step: "10000", pattern: "^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$", required: true, min: "0"}
+                    .col-sm-6
+                      .alert.alert-info.rf-io-notice.collapse
+                        Our apologies, interest only is not currently supported.
                   .row.row-mb
                     .col-sm-4.col-xs-12.visible-xs
                       .rf-form-errors
@@ -141,6 +144,9 @@
                       .input-group.chart-data
                         %span.input-group-addon $
                         %input#propertyValue.form-control{type: "number", step: "10000", pattern: "^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$", required: true, min: "0"}
+                    .col-xs-6
+                      .alert.alert-info.rf-io-notice.collapse
+                        Our apologies, interest only is not currently supported.
                     -# Maybe for 1.1
                       .col-xs-6.lvr-display.collapse.fade
                         %label &nbsp;
@@ -218,7 +224,7 @@
                           Monthly repayments
                       .text-big
                         Based on the interest rate of <span id="interest-rate"></span><span id="interest-rateRF"></span>% and other details you provided, your monthly repayments are&nbsp;
-                        %span.styled-value 
+                        %span.styled-value
                   .row
                     .col-sm-12
                       .chart-holder{style: "max-width:100%;"}
