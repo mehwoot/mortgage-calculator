@@ -77,7 +77,7 @@ $(document).ready(function(){
 
       $.ajax({
         method: "POST",
-        url: "http://staging.ratecity.com.au/api/v1/home_loans_calculator_feed",
+        url: "http://www.ratecity.com.au/api/v1/home_loans_calculator_feed",
         data: {
           amount: borrowAmountTotal,
           term: $('#loanPeriodRF').val(),
@@ -118,7 +118,7 @@ $(document).ready(function(){
 
       $.ajax({
         method: "POST",
-        url: "http://ratecity.com.au/api/v1/home_loans_calculator_feed",
+        url: "http://www.ratecity.com.au/api/v1/home_loans_calculator_feed",
         data: {
           amount: borrowAmountTotal,
           term: $('#loanPeriod').val(),
